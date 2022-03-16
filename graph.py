@@ -1,5 +1,7 @@
 from math import inf
 
+from sklearn import neighbors
+
 
 class graph:
     """
@@ -61,3 +63,8 @@ class graph:
     def get_neighbors(self, vertex):
         assert vertex < self.num_vertices
         return self.adj_list[vertex]
+
+    def get_neighbors_colors(self, vertex, sub_coloring):
+        neighbors = self.get_neighbors(vertex)
+        neighbors_colors = [sub_coloring[i] for i in neighbors if sub_coloring[i] != -1]
+        return neighbors_colors
