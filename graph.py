@@ -1,7 +1,5 @@
 from math import inf
 
-from sklearn import neighbors
-
 
 class graph:
     """

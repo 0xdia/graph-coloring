@@ -1,5 +1,3 @@
-from math import inf
-
 
 def branch_and_bound(g):
     def search(g, sub_coloring, num_colors, num_non_colored):
