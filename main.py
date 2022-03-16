@@ -1,4 +1,5 @@
 import sys
+from graph import graph
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -16,3 +17,6 @@ if __name__ == '__main__':
         exit()
 
     mode = '--adjlist' if len(sys.argv) == 2 else sys.argv[-1]
+    input_file = sys.argv[1]
+
+    g = graph().read(input_file, mode)
