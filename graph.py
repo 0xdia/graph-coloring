@@ -12,25 +12,44 @@ class graph:
 
     def read(self, input_file, mode):
         with open(input_file, 'r') as f:
-            adj_list = f.read().strip().split('\n')
+            input = f.read().strip().split('\n')
 
-            self.num_vertices = int(adj_list[0].split()[0])
-            self.num_edges    = int(adj_list[0].split()[1])
+            self.num_vertices = int(input[0].split()[0])
+            self.num_edges    = int(input[0].split()[1])
             self.adj_matrix = [[0 for _ in range(self.num_vertices)] for _ in range(self.num_vertices)]
-            self.adj_list   = [None for _ in range(self.num_vertices)]
+            self.adj_list   = [[] for _ in range(self.num_vertices)]
 
-            adj_list = adj_list[1:]
-            for lst in adj_list:
-                vertex, neighbors = int(lst.split()[0]), [int(x) for x in lst.split()[1:]]
-                assert vertex < self.num_vertices
+            if mode == "--adjlist":
+                adj_list = input[1:]
+                for lst in adj_list:
+                    vertex, neighbors = int(lst.split()[0]), [int(x) for x in lst.split()[1:]]
+                    assert 0 <= vertex and vertex < self.num_vertices
+                    
+                    # introducing a new row in the adjacency list
+                    self.adj_list[vertex] = neighbors
+
+                    # introducing a new row in the adjacency matrix
+                    for neighbor in neighbors:
+                        self.adj_matrix[vertex][neighbor] = 1
+            else:
+                edges = input[1:]
+                assert len(edges) == self.num_edges
                 
-                # introducing a new row in the adjacency list
-                self.adj_list[vertex] = neighbors
+                for edge in edges:
+                    edge = [int(x) for x in edge.split()]
+                    assert len(edge) == 2
+                    assert 0 <= edge[0] and edge[0] < self.num_vertices
+                    assert 0 <= edge[0] and edge[0] < self.num_vertices
 
-                # introducing a new row in the adjacency matrix
-                for neighbor in neighbors:
-                    self.adj_matrix[vertex][neighbor] = 1
-    
+                    # append each vertex of the edge as neighbor to the other
+                    self.adj_list[edge[0]].append(edge[1])
+                    self.adj_list[edge[1]].append(edge[0])
+
+                    # set the neighborhood in the adjacency matrix
+                    self.adj_matrix[edge[0]][edge[1]] = 1
+                    self.adj_matrix[edge[1]][edge[0]] = 1
+
+
     def get_neighbors(self, vertex):
         assert vertex < self.num_vertices
         return self.adj_list[vertex]
