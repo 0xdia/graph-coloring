@@ -1,3 +1,6 @@
+from math import inf
+
+
 class graph:
     """
     Graph data structure
@@ -8,17 +11,20 @@ class graph:
         self.adj_list = None
         self.num_vertices = 0
         self.num_edges = 0
+        self.colors = None
+        self.approximative_optimum = inf
 
     def read(self, input_file, mode):
         with open(input_file, "r") as f:
             input = f.read().strip().split("\n")
 
-            self.num_vertices = int(input[0].split()[0])
+            self.approximative_optimum = self.num_vertices = int(input[0].split()[0])
             self.num_edges = int(input[0].split()[1])
             self.adj_matrix = [
                 [0 for _ in range(self.num_vertices)] for _ in range(self.num_vertices)
             ]
             self.adj_list = [[] for _ in range(self.num_vertices)]
+            self.colors = [-1 for _ in range(self.num_vertices)]
 
             if mode == "--adjlist":
                 adj_list = input[1:]
