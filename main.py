@@ -19,4 +19,5 @@ if __name__ == '__main__':
     mode = '--adjlist' if len(sys.argv) == 2 else sys.argv[-1]
     input_file = sys.argv[1]
 
-    g = graph().read(input_file, mode)
+    g = graph()
+    g.read(input_file, mode)

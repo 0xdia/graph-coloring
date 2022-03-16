@@ -30,3 +30,7 @@ class graph:
                 # introducing a new row in the adjacency matrix
                 for neighbor in neighbors:
                     self.adj_matrix[vertex][neighbor] = 1
+    
+    def get_neighbors(self, vertex):
+        assert vertex < self.num_vertices
+        return self.adj_list[vertex]
