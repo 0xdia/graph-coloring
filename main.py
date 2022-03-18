@@ -1,6 +1,6 @@
 import sys
 from graph import graph
-from branch_and_bound import branch_and_bound
+import branch_and_bound
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -29,8 +29,6 @@ if __name__ == "__main__":
     g = graph()
     g.read(input_file, mode)
     branch_and_bound(g)
-    print("adjlist: ",g.adj_list)
-    print("edges: ",g.edges)
     print("optimum solution: ", g.approximative_optimum)
     print("coloring: ", g.colors)
     g.visualize_graph()
