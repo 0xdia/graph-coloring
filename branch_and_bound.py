@@ -6,8 +6,9 @@ def branch_and_bound(g):
         if num_non_colored == 0 and num_colors < g.approximative_optimum:
             g.approximative_optimum = num_colors
             g.colors = sub_coloring.copy()
+            return
 
-        if num_colors >= g.approximative_optimum and num_non_colored > 0:
+        if num_colors >= g.approximative_optimum:
             return
 
         new_color = num_colors
