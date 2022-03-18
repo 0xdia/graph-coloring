@@ -1,3 +1,5 @@
+import time
+
 
 def branch_and_bound(g):
     def search(g, sub_coloring, num_colors, num_non_colored):
@@ -36,3 +38,13 @@ def branch_and_bound(g):
 
     sub_coloring = [-1 for _ in range(g.num_vertices)]
     search(g, sub_coloring, 0, g.num_vertices)
+
+
+def measure_execution_time(g):
+    print(f"Number of vertices: {g.num_vertices}, number of edges: {g.num_edges}")
+    start_time = time.time()
+    branch_and_bound(g)
+    end_time = time.time()
+    print("optimum number of colors: ", g.approximative_optimum)
+    print("coloring: ", g.colors)
+    print("Execution time: ", end_time - start_time)
