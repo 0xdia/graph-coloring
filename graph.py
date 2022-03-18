@@ -66,7 +66,7 @@ class graph:
                     self.adj_matrix[edge[1]][edge[0]] = 1
 
                     # update edges list
-                    self.edges.append((edge[0], edge[1]))
+                    self.edges.append(edge)
 
     def get_neighbors(self, vertex):
         assert vertex < self.num_vertices
