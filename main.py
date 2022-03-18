@@ -1,5 +1,6 @@
 import sys
 from graph import graph
+import branch_and_bound
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -27,3 +28,4 @@ if __name__ == "__main__":
 
     g = graph()
     g.read(input_file, mode)
+    branch_and_bound.measure_execution_time(g)
