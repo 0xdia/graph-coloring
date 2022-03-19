@@ -1,6 +1,6 @@
 import sys
 from graph import graph
-from branch_and_bound import branch_and_bound
+from exact_methods.branch_and_bound import branch_and_bound
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
