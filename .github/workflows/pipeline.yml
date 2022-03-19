@@ -1,22 +1,17 @@
 name: Format
 
-on: [push]
+on: pull_request
 
 jobs:
-  build:
+  format:
+    # Check if the PR is not from a fork
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.9"]
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
     - name: Install black
       run: |
         sudo apt-get install black
     - name: Check if code is formated with black
       run: |
-        black $(git ls-files '*.py')
+        black --check $(git ls-files '*.py')
