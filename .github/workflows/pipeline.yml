@@ -14,4 +14,4 @@ jobs:
         sudo apt-get install black
     - name: Check if code is formated with black
       run: |
-        black --check $(git ls-files '*.py')
+        black --check .
