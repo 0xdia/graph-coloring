@@ -9,9 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install black
-      run: |
-        sudo apt-get install black
-    - name: Check if code is formated with black
-      run: |
-        black --check .
+    - name: black
+      uses: lgeiger/black-action@v1.0.1
+      with:
+        args: --check .
