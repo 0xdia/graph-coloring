@@ -68,7 +68,7 @@ class graph:
                     # update edges list
                     self.edges.append(edge)
 
-    def get_neighbors(self, vertex):
+    def get_neighbors(self,vertex):
         assert vertex < self.num_vertices
         return self.adj_list[vertex]
 
@@ -81,5 +81,5 @@ class graph:
         G = nx.Graph()
         G.add_nodes_from([i for i in range(self.num_vertices)])
         G.add_edges_from(self.edges)
-        nx.draw_networkx(G, node_color=self.colors)
+        nx.draw_networkx(G,node_color=self.colors)
         plt.show()
