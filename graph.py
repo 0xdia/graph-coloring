@@ -21,7 +21,11 @@ class graph:
         with open(input_file, "r") as f:
             input = f.read().strip().split("\n")
 
-            self.approximative_optimum = self.num_vertices = int(input[0].split()[0])
+            self.num_vertices = int(input[0].split()[0])
+            # we don't initialize approximative_optimum to num_vertices
+            # because later if the actual required number of colors is
+            # num_vertices, the solution will never be updated.
+            self.approximative_optimum = self.num_vertices + 1
             self.num_edges = int(input[0].split()[1])
             self.adj_matrix = [
                 [0 for _ in range(self.num_vertices)] for _ in range(self.num_vertices)
