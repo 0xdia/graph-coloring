@@ -1,8 +1,11 @@
 import time
 
 
-def branch_and_bound(g):
-    def search(g, sub_coloring, num_colors, num_non_colored):
+def branch_and_bound(g, return_on_first_solution=False):
+    def search(g, sub_coloring, num_colors, num_non_colored, return_on_first_solution):
+        if return_on_first_solution and g.approximative_optimum < self.num_vertices + 1:
+            return
+
         if num_non_colored == 0 and num_colors < g.approximative_optimum:
             g.approximative_optimum = num_colors
             g.colors = sub_coloring.copy()
@@ -38,13 +41,13 @@ def branch_and_bound(g):
             search(g, extended[1], new_color + 1, extended[0])
 
     sub_coloring = [-1 for _ in range(g.num_vertices)]
-    search(g, sub_coloring, 0, g.num_vertices)
+    search(g, sub_coloring, 0, g.num_vertices, return_on_first_solution)
 
 
-def measure_execution_time(g):
+def measure_execution_time(g, return_on_first_solution=False):
     print(f"Number of vertices: {g.num_vertices}, number of edges: {g.num_edges}")
     start_time = time.time()
-    branch_and_bound(g)
+    branch_and_bound(g, return_on_first_solution)
     end_time = time.time()
     print("optimum number of colors: ", g.approximative_optimum)
     print("coloring: ", g.colors)
