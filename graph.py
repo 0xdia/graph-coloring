@@ -77,7 +77,8 @@ class graph:
         while line:
             if line[0] == "p":
                 splited_line = line.split(" ")
-                self.approximative_optimum = self.num_vertices = int(splited_line[2])
+                self.num_vertices = int(splited_line[2])
+                self.approximative_optimum = self.num_vertices + 1
                 self.num_edges = int(splited_line[3])
                 break
             line = f.readline()
