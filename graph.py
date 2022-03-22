@@ -92,8 +92,8 @@ class graph:
         while line:
             if line[0] == "e":
                 splited_line = line.split(" ")
-                vertex = int(splited_line[1]) -1
-                neighbor = int(splited_line[2]) -1 
+                vertex = int(splited_line[1]) - 1
+                neighbor = int(splited_line[2]) - 1
                 # adding the vertex to adjacency list
                 self.adj_list[vertex].append(neighbor)
 
