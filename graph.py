@@ -17,7 +17,7 @@ class graph:
         self.colors = None
         self.approximative_optimum = inf
 
-    def read(self, input_file, mode):
+    def read(self, input_file, mode, indexation):
         with open(input_file, "r") as f:
             input = f.read().strip().split("\n")
 
@@ -41,6 +41,8 @@ class graph:
                     vertex, neighbors = int(lst.split()[0]), [
                         int(x) for x in lst.split()[1:]
                     ]
+                    if indexation == "--1-indexed":
+                        vertex -= 1
                     assert 0 <= vertex and vertex < self.num_vertices
 
                     # introducing a new row in the adjacency list
@@ -58,8 +60,11 @@ class graph:
                 for edge in edges:
                     edge = [int(x) for x in edge.split()]
                     assert len(edge) == 2
+                    if indexation == "--1-indexed":
+                        edge[0] -= 1
+                        edge[1] -= 1
                     assert 0 <= edge[0] and edge[0] < self.num_vertices
-                    assert 0 <= edge[0] and edge[0] < self.num_vertices
+                    assert 0 <= edge[1] and edge[1] < self.num_vertices
 
                     # append each vertex of the edge as neighbor to the other
                     self.adj_list[edge[0]].append(edge[1])
