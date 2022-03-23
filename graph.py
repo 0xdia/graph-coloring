@@ -87,7 +87,7 @@ class graph:
         self.adj_list = [[] for _ in range(self.num_vertices)]
         self.edges = []
         self.colors = [-1 for _ in range(self.num_vertices)]
-        
+
         while line:
             if line[0] == "e":
                 splited_line = line.split(" ")
@@ -98,7 +98,7 @@ class graph:
                 self.adj_list[neighbor].append(vertex)
                 # adding the vertex to adjacency matrix
                 self.adj_matrix[vertex][neighbor] = 1
-                self.adj_matrix[neighbor][vertex]  = 1
+                self.adj_matrix[neighbor][vertex] = 1
                 self.edges.append((vertex, neighbor))
             line = f.readline()
         f.close()
