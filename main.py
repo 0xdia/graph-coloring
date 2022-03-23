@@ -29,7 +29,8 @@ if __name__ == "__main__":
 
     g = graph()
     g.read_2(input_file)
-    branch_and_bound(g)
+    print(g.adj_list)
+    branch_and_bound(g, True)
     print("optimum solution: ", g.approximative_optimum)
     print("coloring: ", g.colors)
     g.visualize_graph()
