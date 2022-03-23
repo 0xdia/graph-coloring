@@ -1,5 +1,6 @@
 from cgi import print_arguments
 from math import inf
+from operator import ne
 from anyio import open_file
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -78,17 +79,15 @@ class graph:
                 splited_line = line.split(" ")
                 self.approximative_optimum = self.num_vertices = int(splited_line[2])
                 self.num_edges = int(splited_line[3])
+                break
             line = f.readline()
-        f.close()
         self.adj_matrix = [
             [0 for _ in range(self.num_vertices)] for _ in range(self.num_vertices)
         ]
         self.adj_list = [[] for _ in range(self.num_vertices)]
         self.edges = []
         self.colors = [-1 for _ in range(self.num_vertices)]
-
-        f = open(input_file, "r")
-        line = f.readline()
+        
         while line:
             if line[0] == "e":
                 splited_line = line.split(" ")
@@ -96,9 +95,10 @@ class graph:
                 neighbor = int(splited_line[2]) - 1
                 # adding the vertex to adjacency list
                 self.adj_list[vertex].append(neighbor)
-
+                self.adj_list[neighbor].append(vertex)
                 # adding the vertex to adjacency matrix
                 self.adj_matrix[vertex][neighbor] = 1
+                self.adj_matrix[neighbor][vertex]  = 1
                 self.edges.append((vertex, neighbor))
             line = f.readline()
         f.close()

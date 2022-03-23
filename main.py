@@ -1,6 +1,5 @@
 import sys
 
-import graphene
 from graph import graph
 from exact_methods.branch_and_bound import branch_and_bound
 
