@@ -28,6 +28,6 @@ if __name__ == "__main__":
     input_file = sys.argv[1]
 
     g = graph()
-    g.read_graph(input_file)
+    g.read(input_file)
     measure_execution_time(g, False)
     g.visualize_graph()

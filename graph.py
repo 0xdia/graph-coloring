@@ -1,7 +1,4 @@
-from cgi import print_arguments
 from math import inf
-from operator import ne
-from anyio import open_file
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -71,39 +68,44 @@ class graph:
                     # update edges list
                     self.edges.append(edge)
 
-    def read_graph(self, input_file):
-        f = open(input_file, "r")
-        line = f.readline()
-        while line:
-            if line[0] == "p":
-                splited_line = line.split(" ")
-                self.num_vertices = int(splited_line[2])
-                self.approximative_optimum = self.num_vertices + 1
-                self.num_edges = int(splited_line[3])
-                break
+    def read(self, input_file):
+        try:
+            f = open(input_file, "r")
+            # reading the file line by line
             line = f.readline()
-        self.adj_matrix = [
-            [0 for _ in range(self.num_vertices)] for _ in range(self.num_vertices)
-        ]
-        self.adj_list = [[] for _ in range(self.num_vertices)]
-        self.edges = []
-        self.colors = [-1 for _ in range(self.num_vertices)]
+            while line:
+                if line[0] == "p":
+                    splited_line = line.split(" ")
+                    self.num_vertices = int(splited_line[2])
+                    self.approximative_optimum = self.num_vertices + 1
+                    self.num_edges = int(splited_line[3])
+                    break
+                line = f.readline()
+            self.adj_matrix = [
+                [0 for _ in range(self.num_vertices)] for _ in range(self.num_vertices)
+            ]
+            self.adj_list = [[] for _ in range(self.num_vertices)]
+            self.edges = []
+            self.colors = [-1 for _ in range(self.num_vertices)]
 
-        while line:
-            if line[0] == "e":
-                splited_line = line.split(" ")
-                vertex = int(splited_line[1]) - 1
-                neighbor = int(splited_line[2]) - 1
-                # adding the vertex to adjacency list
-                self.adj_list[vertex].append(neighbor)
-                self.adj_list[neighbor].append(vertex)
-                # adding the vertex to adjacency matrix
-                self.adj_matrix[vertex][neighbor] = 1
-                self.adj_matrix[neighbor][vertex] = 1
-                if (neighbor,vertex) not in self.edges:
-                    self.edges.append((vertex, neighbor))
-            line = f.readline()
-        f.close()
+            while line:
+                if line[0] == "e":
+                    line = line.replace("e ", "").split()
+                    edge = [int(e) - 1 for e in line]
+                    if all(e < self.num_vertices for e in edge):
+                        # adding the vertex to adjacency list
+                        self.adj_list[edge[0]].append(edge[1])
+                        self.adj_list[edge[1]].append(edge[0])
+                        # adding the vertex to adjacency matrix
+                        self.adj_matrix[edge[0]][edge[1]] = 1
+                        self.adj_matrix[edge[1]][edge[0]] = 1
+                        if (edge[1], edge[0]) not in self.edges:
+                            self.edges.append((edge[0], edge[1]))
+                line = f.readline()
+            f.close()
+        except FileNotFoundError:
+            print("Wrong file or file path")
+            exit()
 
     def get_neighbors(self, vertex):
         assert vertex < self.num_vertices
