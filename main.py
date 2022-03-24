@@ -1,7 +1,7 @@
 import sys
 
 from graph import graph
-from exact_methods.branch_and_bound import branch_and_bound
+from exact_methods.branch_and_bound import measure_execution_time
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -28,9 +28,6 @@ if __name__ == "__main__":
     input_file = sys.argv[1]
 
     g = graph()
-    g.read_2(input_file)
-    print(g.adj_list)
-    branch_and_bound(g, True)
-    print("optimum solution: ", g.approximative_optimum)
-    print("coloring: ", g.colors)
+    g.read_graph(input_file)
+    measure_execution_time(g, False)
     g.visualize_graph()

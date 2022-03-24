@@ -71,7 +71,7 @@ class graph:
                     # update edges list
                     self.edges.append(edge)
 
-    def read_2(self, input_file):
+    def read_graph(self, input_file):
         f = open(input_file, "r")
         line = f.readline()
         while line:
@@ -100,7 +100,8 @@ class graph:
                 # adding the vertex to adjacency matrix
                 self.adj_matrix[vertex][neighbor] = 1
                 self.adj_matrix[neighbor][vertex] = 1
-                self.edges.append((vertex, neighbor))
+                if (neighbor,vertex) not in self.edges:
+                    self.edges.append((vertex, neighbor))
             line = f.readline()
         f.close()
 
