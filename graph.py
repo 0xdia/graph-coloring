@@ -72,6 +72,54 @@ class graph:
                     # update edges list
                     self.edges.append(edge)
 
+    def read(self, input_file):
+        try:
+            f = open(input_file, "r")
+            # reading the file line by line
+            line = f.readline()
+            while line:
+                if line[0] == "p":
+                    splited_line = line.split(" ")
+                    self.num_vertices = int(splited_line[2])
+                    self.approximative_optimum = self.num_vertices + 1
+                    self.num_edges = int(splited_line[3])
+                    break
+                line = f.readline()
+            self.adj_matrix = [
+                [0 for _ in range(self.num_vertices)] for _ in range(self.num_vertices)
+            ]
+            self.adj_list = [[] for _ in range(self.num_vertices)]
+            self.edges = []
+            self.colors = [-1 for _ in range(self.num_vertices)]
+
+            while line:
+                if line[0] == "e":
+                    line = line.replace("e ", "").split()
+                    edge = [int(e) - 1 for e in line]
+
+                    if not all(e < self.num_vertices for e in edge):
+                        raise ValueError(
+                            f"vertex number > number of vertices , Edge {edge[0]} {edge[1]}"
+                        )
+                        exit()
+                    if len(edge) != 2:
+                        raise ValueError(f"Invalide number of vertices {len(edge)}")
+                        exit()
+
+                    # adding the vertex to adjacency list
+                    self.adj_list[edge[0]].append(edge[1])
+                    self.adj_list[edge[1]].append(edge[0])
+                    # adding the vertex to adjacency matrix
+                    self.adj_matrix[edge[0]][edge[1]] = 1
+                    self.adj_matrix[edge[1]][edge[0]] = 1
+                    if (edge[1], edge[0]) not in self.edges:
+                        self.edges.append((edge[0], edge[1]))
+                line = f.readline()
+            f.close()
+        except FileNotFoundError:
+            print("Wrong file or file path")
+            exit()
+
     def get_neighbors(self, vertex):
         assert vertex < self.num_vertices
         return self.adj_list[vertex]
