@@ -96,15 +96,24 @@ class graph:
                 if line[0] == "e":
                     line = line.replace("e ", "").split()
                     edge = [int(e) - 1 for e in line]
-                    if all(e < self.num_vertices for e in edge):
-                        # adding the vertex to adjacency list
-                        self.adj_list[edge[0]].append(edge[1])
-                        self.adj_list[edge[1]].append(edge[0])
-                        # adding the vertex to adjacency matrix
-                        self.adj_matrix[edge[0]][edge[1]] = 1
-                        self.adj_matrix[edge[1]][edge[0]] = 1
-                        if (edge[1], edge[0]) not in self.edges:
-                            self.edges.append((edge[0], edge[1]))
+
+                    if not all(e < self.num_vertices for e in edge):
+                        raise ValueError(
+                            f"vertex number > number of vertices , Edge {edge[0]} {edge[1]}"
+                        )
+                        exit()
+                    if len(edge) != 2:
+                        raise ValueError(f"Invalide number of vertices {len(edge)}")
+                        exit()
+
+                    # adding the vertex to adjacency list
+                    self.adj_list[edge[0]].append(edge[1])
+                    self.adj_list[edge[1]].append(edge[0])
+                    # adding the vertex to adjacency matrix
+                    self.adj_matrix[edge[0]][edge[1]] = 1
+                    self.adj_matrix[edge[1]][edge[0]] = 1
+                    if (edge[1], edge[0]) not in self.edges:
+                        self.edges.append((edge[0], edge[1]))
                 line = f.readline()
             f.close()
         except FileNotFoundError:
