@@ -10,8 +10,6 @@ if __name__ == "__main__":
         exit()
 
     input_file = sys.argv[1]
-    mode = sys.argv[2]
-    indexation = sys.argv[3]
 
     g = graph()
     g.read(input_file)
