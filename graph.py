@@ -133,7 +133,7 @@ class graph:
         neighbors = self.get_neighbors(vertex)
         neighbors_colors = [sub_coloring[i] for i in neighbors if sub_coloring[i] != -1]
         return neighbors_colors
-    
+
     def validate_solution(self):
         for vertex in range(self.num_vertices):
             if self.colors[vertex] == -1:
