@@ -13,5 +13,6 @@ if __name__ == "__main__":
 
     g = graph()
     g.read(input_file)
-    measure_execution_time(g, False)
+    measure_execution_time(g, True)
+    print("Solution accepted ? ", g.validate_solution())
     g.visualize_graph()
