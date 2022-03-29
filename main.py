@@ -1,7 +1,7 @@
 import sys
 
 from graph import graph
-from exact_methods.branch_and_bound import measure_execution_time
+from exact_methods.dynamic_programming import measure_execution_time
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -13,6 +13,8 @@ if __name__ == "__main__":
 
     g = graph()
     g.read(input_file)
-    measure_execution_time(g, True)
+    measure_execution_time(g)
+    print("NUmber of colors: ", g.approximative_optimum)
+    print("Coloring: ", g.colors)
     print("Solution accepted ? ", g.validate_solution())
     g.visualize_graph()
