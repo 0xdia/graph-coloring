@@ -14,7 +14,7 @@ if __name__ == "__main__":
     g = graph()
     g.read(input_file)
     measure_execution_time(g)
+    print("number of vertices: ", g.num_vertices, " number of edges: ", len(g.edges))
     print("NUmber of colors: ", g.approximative_optimum)
     print("Coloring: ", g.colors)
     print("Solution accepted ? ", g.validate_solution())
-    g.visualize_graph()
