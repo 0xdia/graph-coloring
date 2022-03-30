@@ -46,11 +46,19 @@ def branch_and_bound_recursive(g, return_on_first_solution=False):
             search(g, extended[1], new_color + 1, extended[0])
 
     sub_coloring = [-1 for _ in range(g.num_vertices)]
+    # we don't initialize approximative_optimum to num_vertices
+    # because later if the actual required number of colors is
+    # num_vertices, the solution will never be updated.
+    g.approximative_optimum = g.num_vertices + 1
     search(g, sub_coloring, 0, g.num_vertices)
     print("count is; ", countt)
 
 
 def branch_and_bound_iterative(g, return_on_first_solution=False):
+    # we don't initialize approximative_optimum to num_vertices
+    # because later if the actual required number of colors is
+    # num_vertices, the solution will never be updated.
+    g.approximative_optimum = g.num_vertices + 1
     pq = []
     heapq.heappush(pq, (g.num_vertices, 0, [-1 for _ in range(g.num_vertices)]))
     while len(pq) != 0:
@@ -82,7 +90,7 @@ def branch_and_bound_iterative(g, return_on_first_solution=False):
 
             if new_color + 1 >= g.approximative_optimum:
                 continue
-            
+
             if not (not_yet_colored, new_color + 1, possibility) in pq:
                 heapq.heappush(pq, (not_yet_colored, new_color + 1, possibility))
 
