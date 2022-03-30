@@ -138,6 +138,13 @@ class graph:
                 return False
         return True
 
+    def is_independant_set(self, vertex, independant_set):
+        """Returns True if { independant_set U {vertex} } is an independant set"""
+        for element in independant_set:
+            if self.adj_matrix[element][vertex]:
+                return False
+        return True
+
     def visualize_graph(self):
         G = nx.Graph()
         G.add_nodes_from([i for i in range(self.num_vertices)])
