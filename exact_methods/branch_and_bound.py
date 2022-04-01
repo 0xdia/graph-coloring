@@ -23,10 +23,13 @@ def branch_and_bound_recursive(g, return_on_first_solution=False):
         extended_sub_coloring = []
 
         for i in range(len(sub_coloring)):
+            # when sub_coloring[i] != -1, setting possibility and not_yet_colored 
+            # was a waste of time because of the continue commande
+            # so i delayed it until the first i for which sub_coloring[i] == -1
+            if sub_coloring[i] != -1:
+                continue
             not_yet_colored = num_non_colored
             possibility = sub_coloring.copy()
-            if possibility[i] != -1:
-                continue
 
             possibility[i] = new_color
             not_yet_colored -= 1
@@ -73,10 +76,13 @@ def branch_and_bound_iterative(g, return_on_first_solution=False):
 
         new_color = num_colors
         for i in range(len(sub_coloring)):
+            # when sub_coloring[i] != -1, setting possibility and not_yet_colored 
+            # was a waste of time because of the continue commande
+            # so i delayed it until the first i for which sub_coloring[i] == -1
+            if sub_coloring[i] != -1:
+                continue
             not_yet_colored = num_non_colored
             possibility = sub_coloring.copy()
-            if possibility[i] != -1:
-                continue
 
             possibility[i] = new_color
             not_yet_colored -= 1
