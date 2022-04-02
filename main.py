@@ -1,7 +1,7 @@
 import sys
 
 from graph import graph
-from exact_methods.branch_and_bound import measured_branch_and_bound
+from exact_methods.dynamic_programming import measured_dp
 
 if __name__ == "__main__":
     # Check the validity of the usage.
@@ -17,4 +17,4 @@ if __name__ == "__main__":
     g.read(input_file)
 
     # Color the graph g and mesure the time it takes.
-    measured_branch_and_bound(g, False, True)
+    measured_dp(g)
