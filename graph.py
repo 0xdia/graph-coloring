@@ -14,7 +14,7 @@ class graph:
         self.edges = None  # List of edges data structure.
         self.num_vertices = 0  # The number of vertices in the graph.
         self.num_edges = 0  # The number of vertices in the graph.
-        self.colors = None  # The colors of the verticies of g.
+        self.colors = None  # The colors of the vertices of g.
         self.optimum = inf  # The optimum number of colors used to color the graph.
 
     def read(self, input_file, mode, indexation):
@@ -42,7 +42,7 @@ class graph:
             self.adj_list = [[] for _ in range(self.num_vertices)]
             self.edges = []
 
-            # initialize the colors of verticies to -1 (not colored).
+            # initialize the colors of vertices to -1 (not colored).
             self.colors = [-1 for _ in range(self.num_vertices)]
 
             if mode == "--adjlist":
@@ -113,7 +113,7 @@ class graph:
             line = f.readline()
 
             # Read graph information and setting
-            # the values of number of verticies, number of edges, and optimum.
+            # the values of number of vertices, number of edges, and optimum.
             while line:
                 if line[0] == "p":
                     splited_line = line.split(" ")
@@ -130,7 +130,7 @@ class graph:
             self.adj_list = [[] for _ in range(self.num_vertices)]
             self.edges = []
 
-            # initialize the colors of verticies to -1 (not colored).
+            # initialize the colors of vertices to -1 (not colored).
             self.colors = [-1 for _ in range(self.num_vertices)]
 
             # Read the edges.

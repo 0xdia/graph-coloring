@@ -1,6 +1,7 @@
 import heapq
 import time
 
+# Keep track of how many times `search` is executed.
 recursion_depth = 0
 
 
@@ -20,7 +21,6 @@ def branch_and_bound_recursive(g, return_on_first_leaf=False):
         * num_colors: nombre of colors used in this node.
         * num_non_colored: nomber of uncolored vertices in this node.
         """
-        # Keep track of how many times `search` is executed.
         global recursion_depth
         recursion_depth += 1
 
@@ -60,7 +60,7 @@ def branch_and_bound_recursive(g, return_on_first_leaf=False):
             possibility[i] = new_color
             not_yet_colored -= 1
 
-            # Color as much verticies as possible with the new color.
+            # Color as much vertices as possible with the new color.
             for j in range(len(possibility)):
                 # Find the next uncolored vertex.
                 if possibility[j] != -1:
@@ -85,8 +85,8 @@ def branch_and_bound_recursive(g, return_on_first_leaf=False):
         for extended in extended_sub_coloring:
             search(g, extended[1], new_color + 1, extended[0])
 
-    # Initalize the root node with no vertex colored.
-    # Initalize the optimum with a value bigger than the worst case.
+    # Initialize the root node with no vertex colored.
+    # Initialize the optimum with a value bigger than the worst case.
     sub_coloring = [-1 for _ in range(g.num_vertices)]
     g.optimum = g.num_vertices + 1
 
@@ -102,29 +102,29 @@ def branch_and_bound_iterative(g, return_on_first_leaf=False):
     * g: the graph to be colored
     * return_on_first_leaf: a flag to return when reaching the first solution.
     """
-    # Initalize the optimum with a value bigger than the worst case.
+    # Initialize the optimum with a value bigger than the worst case.
     g.optimum = g.num_vertices + 1
 
     # Create a priority queue to hold nodes
-    # with nodes closest to leaf (having the least number of uncolored verticies),
+    # with nodes closest to leaf (having the least number of uncolored vertices),
     # and using less colors, in that order
     # having a higher priority.
     pq = []
 
-    # Push the root node to the queue
+    # Push the root node to the queue.
     heapq.heappush(pq, (g.num_vertices, 0, [-1 for _ in range(g.num_vertices)]))
 
-    # While not all branches were evaluated
+    # While not all branches were evaluated.
     while len(pq) != 0:
 
-        # Pop the highest priority node
+        # Pop the highest priority node.
         num_non_colored, num_colors, sub_coloring = heapq.heappop(pq)
 
         # Return if the optimum was updated and the `return_on_first_leaf` flag is true.
         if return_on_first_leaf and g.optimum < g.num_vertices + 1:
             break
 
-        # Update the optimum number of colors and the colors of the verticies of g
+        # Update the optimum number of colors and the colors of the vertices of g
         # if a better solution is found.
         if num_non_colored == 0 and num_colors < g.optimum:
             g.optimum = num_colors
@@ -148,7 +148,7 @@ def branch_and_bound_iterative(g, return_on_first_leaf=False):
             possibility[i] = new_color
             not_yet_colored -= 1
 
-            # Color as much verticies as possible with the new color.
+            # Color as much vertices as possible with the new color.
             for j in range(len(possibility)):
                 # Find the next uncolored vertex.
                 if possibility[j] != -1:
@@ -182,20 +182,20 @@ def measured_branch_and_bound(g, return_on_first_leaf=False, recursive=False):
     """
     print(f"Number of vertices: {g.num_vertices}, number of edges: {g.num_edges}")
 
-    # Start timer
+    # Start timer.
     start_time = time.time()
 
     if recursive:
-        # Call the recursive implimentaion
+        # Call the recursive implementation.
         branch_and_bound_recursive(g, return_on_first_leaf)
     else:
-        # Call the iterative implimentaion
+        # Call the iterative implementation.
         branch_and_bound_iterative(g, return_on_first_leaf)
 
-    # Stop timer
+    # Stop timer.
     end_time = time.time()
 
-    # Print results
+    # Print results.
     print("optimum number of colors: ", g.optimum)
     print("coloring: ", g.colors)
     print("Execution time: ", end_time - start_time)
