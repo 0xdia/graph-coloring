@@ -203,7 +203,7 @@ class graph:
 
     def visualize_graph(self):
         """
-        Visualize the colored graph 
+        Visualize the colored graph
         """
         G = nx.Graph()
         G.add_nodes_from([i for i in range(self.num_vertices)])

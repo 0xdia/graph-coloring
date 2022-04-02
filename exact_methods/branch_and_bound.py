@@ -28,7 +28,7 @@ def branch_and_bound_recursive(g, return_on_first_leaf=False):
         if return_on_first_leaf and g.optimum < g.num_vertices + 1:
             return
 
-        # Update the optimal number of colors and the colors of the vertices of g 
+        # Update the optimal number of colors and the colors of the vertices of g
         # if a better solution is found.
         if num_non_colored == 0 and num_colors < g.optimum:
             g.optimum = num_colors
