@@ -4,7 +4,7 @@ from graph import graph
 from exact_methods.branch_and_bound import measured_branch_and_bound
 
 if __name__ == "__main__":
-    # Check the validity of the usage.
+    # Vérifier la validité d'usage. 
     if len(sys.argv) != 2:
         print("error: wrong number of arguements.")
         print("usage: python3 main.py input_file.txt\n")
@@ -12,9 +12,9 @@ if __name__ == "__main__":
 
     input_file = sys.argv[1]
 
-    # Create a graph from the input file.
+    # Créer un graphe à partir du fichier d'entrée. 
     g = graph()
     g.read(input_file)
 
-    # Color the graph g and mesure the time it takes.
+    # Colorer le graphe g et mesure le temps que ça prend.
     measured_branch_and_bound(g, False, True)
