@@ -192,11 +192,11 @@ class graph:
                 return False
         return True
 
-    def is_independent_set(self, vertex, independant_set):
+    def is_independent_set(self, vertex, independent_sets):
         """
         Returns True if { independant_set U {vertex} } is an independant set.
         """
-        for element in independant_set:
+        for element in independent_sets:
             if self.adj_matrix[element][vertex]:
                 return False
         return True
