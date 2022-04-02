@@ -1,96 +1,96 @@
 import heapq
 import time
 
+# Garder une trace du nombre de fois que `search` est exécuté.
 recursion_depth = 0
 
 
 def branch_and_bound_recursive(g, return_on_first_leaf=False):
     """
-    Recursive implimentation of branch and bound algorithm to
-    solve the coloring problem in a graph.
-    * g: the graph to be colored
-    * return_on_first_leaf: a flag to return when reaching the first solution.
+Implémentation récursive de l'algorithme de branch and bound pour
+     résoudre le problème de coloration d'un graphe.
+     * g : le graphe à colorer
+     * return_on_first_leaf : un indicateur pour retourner lors de l'atteinte de la première solution. 
     """
 
     def search(g, sub_coloring, num_colors, num_non_colored):
         """
-        Recursive function to evaluate an internal node in the branch and bound tree.
-        * g: the graph to be colored.
-        * sub_coloring : the internal node.
-        * num_colors: nombre of colors used in this node.
-        * num_non_colored: nomber of uncolored vertices in this node.
+Fonction récursive pour évaluer un nœud interne dans l'arbre du parcours du branch and bound.
+         * g : le graphe à colorier.
+         * sub_coloring : le nœud interne.
+         * num_colors : nombre de couleurs utilisées dans ce nœud.
+         * num_non_colored : nombre de sommets non colorés dans ce nœud. 
         """
-        # Keep track of how many times `search` is executed.
         global recursion_depth
         recursion_depth += 1
 
-        # Return if the optimum was updated and the `return_on_first_leaf` flag is true.
+        # Retourner si l'optimum a été mis à jour et que l'indicateur `return_on_first_leaf` est vrai. 
         if return_on_first_leaf and g.optimum < g.num_vertices + 1:
             return
 
-        # Update the optimal number of colors and the colors of the vertices of g
-        # if a better solution is found.
+        # Mettre à jour le nombre optimal de couleurs et les couleurs des sommets de g
+        # si une meilleure solution est trouvée. 
         if num_non_colored == 0 and num_colors < g.optimum:
             g.optimum = num_colors
             g.colors = sub_coloring.copy()
             return
 
-        # Cut the branch if the number of colors used so far
-        # is already bigger than or equal the optimum.
+        # Couper la branche si le nombre de couleurs utilisées jusqu'à présent
+        # est déjà supérieur ou égal à l'optimum. 
         if num_colors >= g.optimum:
             return
 
-        # Introduce a new color.
+        # Introduiser une nouvelle couleur. 
         new_color = num_colors
 
-        # Create list to hold children of this node.
+        # Créer une liste pour contenir les fils de ce nœud. 
         extended_sub_coloring = []
 
-        # Create children for this node.
+        # Créer des fils pour ce nœud.
         for i in range(len(sub_coloring)):
-            # Find the next uncolored vertex.
+            # Trouver le prochain sommet non coloré. 
             if sub_coloring[i] != -1:
                 continue
 
-            # Initialize a new child.
+            # Initialiser un nouveau fils. 
             not_yet_colored = num_non_colored
             possibility = sub_coloring.copy()
 
-            # Color the uncolored vertex found with the new color.
+            # Colorez le sommet non coloré trouvé avec la nouvelle couleur. 
             possibility[i] = new_color
             not_yet_colored -= 1
 
-            # Color as much verticies as possible with the new color.
+            # Colorer autant de sommets que possible avec la nouvelle couleur. 
             for j in range(len(possibility)):
-                # Find the next uncolored vertex.
+                # Trouver le prochain sommet non coloré. 
                 if possibility[j] != -1:
                     continue
 
-                # Color the uncolored vertex found with the new color
-                # if there's no conflict with neighbors colors.
+                # Colorer le sommet non coloré trouvé avec la nouvelle couleur
+                # s'il n'y a pas de conflit avec les couleurs des voisines. 
                 neighbors_colors = g.get_neighbors_colors(j, possibility)
                 if new_color not in neighbors_colors:
                     possibility[j] = new_color
                     not_yet_colored -= 1
 
-            # Add the new child to the list.
+            # Ajouter le nouveau fils à la liste. 
             if (not_yet_colored, possibility) not in extended_sub_coloring:
                 extended_sub_coloring.append((not_yet_colored, possibility))
 
-        # Sort the children in ascending order based on
-        # the value of not_yet_colored (closest to leaf).
+        # Trier les fils par ordre croissant
+        # en fonction de la valeur de not_yet_colored (le plus proche de la feuille). 
         extended_sub_coloring.sort()
 
-        # Call `search` on each child created.
+        # Appeler `search` sur chaque fils créé.
         for extended in extended_sub_coloring:
             search(g, extended[1], new_color + 1, extended[0])
 
-    # Initalize the root node with no vertex colored.
-    # Initalize the optimum with a value bigger than the worst case.
+    # Initialiser le nœud racine avec tous les sommet sans couleur.
+    # Initialiser l'optimum avec une valeur supérieure au pire des cas. 
     sub_coloring = [-1 for _ in range(g.num_vertices)]
     g.optimum = g.num_vertices + 1
 
-    # Start the search.
+    # Lancer la recherche.
     search(g, sub_coloring, 0, g.num_vertices)
     print("recursion_depth is; ", recursion_depth)
 
@@ -102,71 +102,70 @@ def branch_and_bound_iterative(g, return_on_first_leaf=False):
     * g: the graph to be colored
     * return_on_first_leaf: a flag to return when reaching the first solution.
     """
-    # Initalize the optimum with a value bigger than the worst case.
+    # Initialiser l'optimum avec une valeur supérieure au pire des cas. 
     g.optimum = g.num_vertices + 1
 
-    # Create a priority queue to hold nodes
-    # with nodes closest to leaf (having the least number of uncolored verticies),
-    # and using less colors, in that order
-    # having a higher priority.
+    # Créer une file d'attente avec priorité pour contenir les nœuds
+    # avec les nœuds les plus proches du feuilles (ayant le moins de sommets non colorés),
+    # et en utilisant moins de couleurs, dans cet ordre, ayant une priorité plus élevée. 
     pq = []
 
-    # Push the root node to the queue
+    # Poussez le nœud racine vers la file d'attente. 
     heapq.heappush(pq, (g.num_vertices, 0, [-1 for _ in range(g.num_vertices)]))
 
-    # While not all branches were evaluated
+    # Tant que toutes les branches n'ont pas été évaluées.
     while len(pq) != 0:
 
-        # Pop the highest priority node
+        # Pop le nœud de priorité la plus élevée.
         num_non_colored, num_colors, sub_coloring = heapq.heappop(pq)
 
-        # Return if the optimum was updated and the `return_on_first_leaf` flag is true.
+        # Retourner si l'optimum a été mis à jour et que l'indicateur `return_on_first_leaf` est vrai. 
         if return_on_first_leaf and g.optimum < g.num_vertices + 1:
             break
 
-        # Update the optimum number of colors and the colors of the verticies of g
-        # if a better solution is found.
+        # Mettre à jour le nombre optimal de couleurs et les couleurs des sommets de g
+        # si une meilleure solution est trouvée. 
         if num_non_colored == 0 and num_colors < g.optimum:
             g.optimum = num_colors
             g.colors = sub_coloring.copy()
             continue
 
-        # Inroduce a new color.
+        # Introduiser une nouvelle couleur. 
         new_color = num_colors
 
-        # Create children for this node.
+        # Créer des fils pour ce nœud.
         for i in range(len(sub_coloring)):
-            # Find the next uncolored vertex.
+            # Trouver le prochain sommet non coloré. 
             if sub_coloring[i] != -1:
                 continue
 
-            # Initialize a new child.
+            # Initialiser un nouveau fils. 
             not_yet_colored = num_non_colored
             possibility = sub_coloring.copy()
 
-            # Color the uncolored vertex found with the new color.
+            # Colorer le sommet non coloré trouvé avec la nouvelle couleur. 
             possibility[i] = new_color
             not_yet_colored -= 1
 
-            # Color as much verticies as possible with the new color.
+            # Colorer autant de sommets que possible avec la nouvelle couleur. 
             for j in range(len(possibility)):
-                # Find the next uncolored vertex.
+                # Trouver le prochain sommet non coloré. 
                 if possibility[j] != -1:
                     continue
 
-                # Color the uncolored vertex found with the new color
-                # if there's no conflict with neighbors.
+                # Colorer le sommet non coloré trouvé avec la nouvelle couleur
+                # s'il n'y a pas de conflit avec les couleurs des voisines. 
                 neighbors_colors = g.get_neighbors_colors(j, possibility)
                 if new_color not in neighbors_colors:
                     possibility[j] = new_color
                     not_yet_colored -= 1
 
-            # Cut the branch if the number of colors used so far
-            # is already bigger than or equal the optimum.
+            # Couper la branche si le nombre de couleurs utilisées jusqu'à présent
+            # est déjà supérieur ou égal à l'optimum. 
             if new_color + 1 >= g.optimum:
                 continue
 
-            # Add the new child to the queue.
+            # Ajouter le nouveau fils à la file d'attente. 
             if not (not_yet_colored, new_color + 1, possibility) in pq:
                 heapq.heappush(pq, (not_yet_colored, new_color + 1, possibility))
 
@@ -175,27 +174,27 @@ def branch_and_bound_iterative(g, return_on_first_leaf=False):
 
 def measured_branch_and_bound(g, return_on_first_leaf=False, recursive=False):
     """
-    Measure the time it takes to color a graph using branch and bound.
-    * g: the graph to be colored.
-    * return_on_first_leaf: a flag to return when reaching the first solution.
-    * recursive : a flag to use recursive or iterative implimentation of branch and bound.
+    Mesurez le temps qu'il faut pour colorer un graphe à l'aide de branch and bound.
+    * g : le graphe à colorer.
+    * return_on_first_leaf : un indicateur pour retourner lors de l'atteinte de la première solution.
+    * recursive : un indicateur pour utiliser l'implémentation récursive ou itérative de branch and bound. 
     """
     print(f"Number of vertices: {g.num_vertices}, number of edges: {g.num_edges}")
 
-    # Start timer
+    # Démarrer le chrono
     start_time = time.time()
 
     if recursive:
-        # Call the recursive implimentaion
+        # Appelez l'implémentation récursive.
         branch_and_bound_recursive(g, return_on_first_leaf)
     else:
-        # Call the iterative implimentaion
+        # Appeler l'implémentation itérative.
         branch_and_bound_iterative(g, return_on_first_leaf)
 
-    # Stop timer
+    # Arrêter le chrono.
     end_time = time.time()
 
-    # Print results
+    # Afficher les résultats.
     print("optimum number of colors: ", g.optimum)
     print("coloring: ", g.colors)
     print("Execution time: ", end_time - start_time)
