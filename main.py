@@ -2,6 +2,7 @@ import sys
 
 from graph import graph
 from exact_methods.dynamic_programming import measured_dp
+from heuristics.d_satur import measure_d_satur
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
@@ -17,4 +18,4 @@ if __name__ == "__main__":
     g.read(input_file)
 
     # Colorer le graphe g et mesure le temps que ça prend.
-    measured_dp(g)
+    measure_d_satur(g)
