@@ -1,8 +1,8 @@
 import sys
 
 from graph import graph
-from heuristics.RLF import rlf
-from exact_methods.branch_and_bound import branch_and_bound_recursive
+from heuristics.RLF import rlf, measure_rlf
+from exact_methods.branch_and_bound import branch_and_bound_recursive, measured_branch_and_bound
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
@@ -12,17 +12,13 @@ if __name__ == "__main__":
         exit()
 
     input_file = sys.argv[1]
-
     # Créer un graphe à partir du fichier d'entrée.
     g = graph()
     g.read(input_file)
 
     # Colorer le graphe g et mesure le temps que ça prend.
-    rlf(g)
-    # branch_and_bound_recursive(g, False)
+    #measure_rlf(g)
+    measured_branch_and_bound(g, False, False)
 
-    print("result is: ")
-    print(g.optimum)
-    print(g.colors)
     g.validate_solution()
     # g.visualize_graph()

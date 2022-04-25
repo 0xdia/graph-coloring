@@ -1,3 +1,5 @@
+import time
+
 def rlf(g):
     def choose_next(not_adjacent_to_colored, adjacent_to_colored):
         return sorted(
@@ -15,11 +17,9 @@ def rlf(g):
 
     def recurse(X, current_color):
         g.optimum = current_color + 1
-        # S = set()
         x = vertex_of_max_degree_in_subgraph(X)
         # print(f"set color of {x} to {current_color}")
         g.colors[x] = current_color
-        # S.add(x)
 
         adjacent_to_colored = set(get_neighbors_in_subgraph(x, X))
         X.remove(x)
@@ -28,14 +28,12 @@ def rlf(g):
         while len(not_adjacent_to_colored) != 0:
             x = choose_next(not_adjacent_to_colored, adjacent_to_colored)
             g.colors[x] = current_color
-            # S.add(x)
             not_adjacent_to_colored.remove(x)
             x_neighbors = get_neighbors_in_subgraph(x, X)
             # print(f"set color of {x} to {current_color}")
             # print("its neighbors are ", x_neighbors)
             # print("X is ", X)
             for n in x_neighbors:
-                # S.add(n)
                 if n in not_adjacent_to_colored:
                     not_adjacent_to_colored.remove(n)
                 adjacent_to_colored.add(n)
@@ -50,7 +48,16 @@ def rlf(g):
 
     # print('get neighbors in sub: ', get_neighbors_in_subgraph(0, X))
     # print('vertex of max deg: ', vertex_of_max_degree_in_subgraph(X))
-    # return
-
+    # print("start")
     g.optimum = current_color = 0
     recurse(X, current_color)
+
+def measure_rlf(g):
+    start_time = time.time()
+    rlf(g)
+    end_time = time.time()
+    
+    print(f"Number of vertices: {g.num_vertices}, number of edges: {g.num_edges}")
+    print("Optimum: ", g.optimum)
+    print("Colors: ", g.colors)
+    print("Execution time: ", end_time - start_time)
