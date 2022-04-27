@@ -60,12 +60,12 @@ def d_satur(g):
         for neighbor in g.get_neighbors(vertex):
             if g.colors[neighbor] == -1:
                 # update the degree_in_uncolored_subgraph
-                dict[neighbor][1] -= 1
+                uncolored_vertices[neighbor][1] -= 1
                 if not is_color_in_neighbors(g, neighbor, vertex_color):
                     # update the degree_of_saturation
-                    dict[neighbor][0] += 1
+                    uncolored_vertices[neighbor][0] += 1
         # remove the vertex (vertex is now colored)
-        dict.pop(vertex)
+        uncolored_vertices.pop(vertex)
 
     # update the optimum
     g.optimum = max(g.colors) + 1
