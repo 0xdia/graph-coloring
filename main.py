@@ -2,7 +2,6 @@ import sys
 
 from graph import graph
 from heuristics.RLF import rlf, measure_rlf
-from exact_methods.branch_and_bound import branch_and_bound_recursive, measured_branch_and_bound
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
@@ -17,8 +16,8 @@ if __name__ == "__main__":
     g.read(input_file)
 
     # Colorer le graphe g et mesure le temps que ça prend.
-    #measure_rlf(g)
-    measured_branch_and_bound(g, False, False)
+    measure_rlf(g)
+    # measured_branch_and_bound(g, False, False)
 
     g.validate_solution()
     # g.visualize_graph()
