@@ -18,9 +18,9 @@ if __name__ == "__main__":
     g.read(input_file)
 
     # Colorer le graphe g et mesure le temps que ça prend.
-    #measured_dp(g)
-    #measure_rlf(g)
-    #measure_d_satur(g)
+    # measured_dp(g)
+    # measure_rlf(g)
+    # measure_d_satur(g)
     measured_branch_and_bound(g, False, False)
 
     g.validate_solution()
