@@ -1,7 +1,9 @@
 import sys
-
 from graph import graph
-from heuristics.RLF import rlf, measure_rlf
+from exact_methods.branch_and_bound import measured_branch_and_bound
+from exact_methods.dynamic_programming import measured_dp
+from heuristics.RLF import measure_rlf
+from heuristics.d_satur import measure_d_satur
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
@@ -16,8 +18,10 @@ if __name__ == "__main__":
     g.read(input_file)
 
     # Colorer le graphe g et mesure le temps que ça prend.
-    measure_rlf(g)
-    # measured_branch_and_bound(g, False, False)
+    #measured_dp(g)
+    #measure_rlf(g)
+    #measure_d_satur(g)
+    measured_branch_and_bound(g, False, False)
 
     g.validate_solution()
     # g.visualize_graph()

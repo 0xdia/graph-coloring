@@ -15,6 +15,7 @@ class graph:
         self.num_vertices = 0  # Le nombre de sommets dans le graphe.
         self.num_edges = 0  # Le nombre d'arêtes dans le graphe.
         self.colors = None  # Les couleurs des sommets de g.
+        self.degrees = None
         self.optimum = (
             inf  # Le nombre optimal de couleurs utilisées pour colorer le graphe.
         )
@@ -47,15 +48,18 @@ class graph:
             # initialiser les couleurs des sommets à -1 (non coloré).
             self.colors = [-1 for _ in range(self.num_vertices)]
 
+            self.degrees = [-1 for _ in range(self.num_vertices)]
+
             if mode == "--adjlist":
                 adj_list = input[1:]
 
                 # Pour chaque ligne du fichier d'entrée,
                 # obtenir le sommet et sa liste d'adjacence.
                 for lst in adj_list:
-                    vertex, neighbors = int(lst.split()[0]), [
-                        int(x) for x in lst.split()[1:]
-                    ]
+                    vertex, neighbors = (
+                        int(lst.split()[0]),
+                        [int(x) for x in lst.split()[1:]],
+                    )
 
                     # Considérez l'indexation.
                     if indexation == "--1-indexed":
@@ -66,6 +70,8 @@ class graph:
 
                     # introduire une nouvelle liste dans la liste d'd'adjacence.
                     self.adj_list[vertex] = neighbors
+
+                    self.degrees[vertex] = len(neighbors)
 
                     # introduire une nouvelle ligne dans la matrice d'adjacence
                     # et mettre à jour la liste des arêtes .
@@ -104,6 +110,9 @@ class graph:
                     # Mettre à jour la liste des arêtes.
                     self.edges.append(edge)
 
+                    self.degrees[edge[0]] += 1
+                    self.degrees[edge[1]] += 1
+
     def read(self, input_file):
         """
         Lire un fichier d'entrée au format standard DIMACS et remplir le graphe.
@@ -137,6 +146,8 @@ class graph:
             # initialise les couleurs des sommets à -1 (non coloré).
             self.colors = [-1 for _ in range(self.num_vertices)]
 
+            self.degrees = [-1 for _ in range(self.num_vertices)]
+
             # Lire les arêtes du graphe.
             while line:
                 if line[0] == "e":
@@ -164,6 +175,9 @@ class graph:
                     # Mettre à jour la liste des arêtes.
                     if (edge[1], edge[0]) not in self.edges:
                         self.edges.append((edge[0], edge[1]))
+
+                    self.degrees[edge[0]] += 1
+                    self.degrees[edge[1]] += 1
                 line = f.readline()
             f.close()
         except FileNotFoundError:
