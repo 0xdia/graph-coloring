@@ -1,8 +1,8 @@
-                    RLF                     B&B
-input_ciel_6        (5, 0.0003s)            (5, 0.0125s)
+                    RLF                     B&B                         DSATUR
+input_ciel_6        (5, 0.0003s)            (5, 0.0125s)                (5,0.00028s)
 
-input_ciel_4        (7, 0.0028s)            (6, 4,9522s)
+input_ciel_4        (7, 0.0028s)            (6, 4,9522s)                (7,0.00229s)
 
-multisol_4          (31, 0.0146s)           des minutes au moins
+multisol_4          (31, 0.0146s)           des minutes au moins        (31,0.0151s)
 
-huck                (11, 0.0021s)           des minutes au moins
+huck                (11, 0.0021s)           des minutes au moins        (11,0.00173s)
