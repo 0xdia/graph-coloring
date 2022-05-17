@@ -4,7 +4,7 @@ from time import time
 seed(time())  # initialize the seed
 
 
-def crossing(father, mother, manner="1point"):
+def crossing(father, mother, manner="1"):
     def uniform_crossing(father, mother):
         first_child, second_child = father.copy(), mother.copy()
         for i in range(len(father)):
@@ -43,15 +43,21 @@ def crossing(father, mother, manner="1point"):
         if manner == "uniforme"
         else k_points_crossing(father, mother, int(manner))
     )
-    pass
 
 
-father = [1, 2, 3, 4, 5, 6]
+def mutation(individual):
+    colors = list(set(individual))
+    gene = randint(0, len(individual) - 1)
+    new_gene = randint(0, len(colors) - 1)
+    while colors[new_gene] == individual[gene]:
+        new_gene = randint(0, len(colors) - 1)
+
+    individual[gene] = colors[new_gene]
+
+
+father = [1, 2, 3, 4, 5, 5]
 mother = [10, 20, 30, 40, 50, 60]
 
-first, second = crossing(father, mother, "4")
+mutation(father)
 
 print(father)
-print(mother)
-print(first)
-print(second)
