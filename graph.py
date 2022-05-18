@@ -199,6 +199,15 @@ class graph:
         neighbors_colors = [sub_coloring[i] for i in neighbors if sub_coloring[i] != -1]
         return neighbors_colors
 
+    def update_solution(self, new_solution):
+        """
+        Mettre a jour la solution si new_solution est meilleur.
+        """
+        num_of_colors = len(set(new_solution))
+        if num_of_colors > self.optimum:
+            self.optimum = num_of_colors
+            self.colors = new_solution
+
     def validate_solution(self):
         """
         Retourner Vrai si la coloration du graphe est valide.
