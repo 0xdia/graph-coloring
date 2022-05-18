@@ -101,25 +101,30 @@ def crossing(father, mother, manner="1"):
     )
 
 
-def crossing_in_pool(g, population, crossing_proba, num_of_matings, manner):
-    num_crossings = int(len(population) * crossing_proba)
-    print(num_crossings)
+def crossing_in_pool(g, pool_size, population, crossing_proba, num_of_matings, manner):
     new_population = population.copy()
-    for _ in range(num_crossings):
-        mother_idx = randint(0, len(population) - 1)
-        father_idx = mother_idx
-        while father_idx == mother_idx:
-            father_idx = randint(0, len(population) - 1)
+    for i in range(len(population)):
+        proba = uniform(0.0, 0.99)
+        if proba > crossing_proba:
+            continue
 
-        for __ in range(num_of_matings):
-            child_1, child_2 = crossing(
-                population[father_idx], population[mother_idx], manner
-            )
+        for j in range(len(population)):
+            proba = uniform(0.0, 0.99)
+            if proba > crossing_proba or i == j:
+                continue
 
-            if not individual_dies(g, child_1):
-                new_population.append(child_1)
-            if not individual_dies(g, child_2):
-                new_population.append(child_2)
+            for _ in range(num_of_matings):
+                child_1, child_2 = crossing(
+                    population[i], population[j], manner
+                )
+
+                if not individual_dies(g, child_1) and child_1 not in new_population:
+                    new_population.append(child_1)
+                if not individual_dies(g, child_2) and child_2 not in new_population:
+                    new_population.append(child_2)
+
+        if len(new_population) >= pool_size:
+            break
 
     return new_population
 
@@ -133,10 +138,19 @@ def mutation(individual):
 
     individual[gene] = colors[new_gene]
 
+def mutation_in_pool(g, population, mutation_proba):
+    new = []
+    for individual in population:
+        proba = uniform(0.0, 0.99)
+        if proba <= mutation_proba:
+            mutation(individual)
+        if not individual_dies(g, individual):
+            new.append(individual)
+    return new
 
 def genetic_algorithm(
     g,
-    initial_population_size,
+    pool_size,
     selection_strategy,
     selection_percentage,
     crossing_proba,
@@ -148,15 +162,23 @@ def genetic_algorithm(
     # For instance, we intialize the population randomly
     population = [
         [randint(0, g.num_vertices) for i in range(g.num_vertices)]
-        for _ in range(initial_population_size)
+        for _ in range(pool_size)
     ]
 
-    for iter in range(nbr_iterations):
-        print("size of pop before selection = ", len(population))
+    for _ in range(nbr_iterations):
+        if len(population) == 1:
+            break
+
+        print("====> size of pop before selection = ", len(population))
         population = selection(population, selection_strategy, selection_percentage)
         print("size of pop after selection = ", len(population))
         new = crossing_in_pool(
-            g, population, crossing_proba, num_of_matings, crossing_manner
+            g, pool_size, population, crossing_proba, num_of_matings, crossing_manner
         )
         print("size of pop after crossing = ", len(new))
-        break
+        new = mutation_in_pool(g, new, mutation_proba)     
+        print("size of pop after mutation = ", len(new))
+        population = new.copy()
+
+        
+        
