@@ -207,7 +207,9 @@ class graph:
         if num_of_colors > self.optimum:
             self.optimum = num_of_colors
             self.colors = new_solution
-
+            return True
+        return False
+        
     def validate_solution(self):
         """
         Retourner Vrai si la coloration du graphe est valide.
