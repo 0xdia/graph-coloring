@@ -1,7 +1,25 @@
 from random import randint, seed, uniform
+from heuristics.d_satur import d_satur
+from heuristics.RLF import rlf
 import time
 
 seed(time.time())  # initialize the seed
+
+
+def init_population(g, pool_size):
+    """ initial_population = []
+    initialzed_optimum, initialzed_colors = g.optimum, g.colors.copy()
+    d_satur(g)
+    initial_population.append(g.colors)
+    g.optimum, g.colors = initialzed_optimum, initialzed_colors
+    rlf(g)
+    initial_population.append(g.colors)
+    g.optimum, g.colors = initialzed_optimum, initialzed_colors """
+    initial_population = [
+        [randint(0, g.num_vertices) for __ in range(g.num_vertices)]
+        for _ in range(pool_size)
+    ]
+    return initial_population
 
 
 def selection(population, strategy="random", percentage=0.5):
@@ -146,7 +164,8 @@ def mutation_in_pool(g, population, mutation_proba):
         if not individual_dies(g, individual):
             new.append(individual)
             # check if individual is the best fitting to update the solution
-            g.update_solution(individual)
+            if g.update_solution(individual):
+                print("solution updated!")
     return new
 
 
@@ -161,17 +180,14 @@ def genetic_algorithm(
     mutation_proba,
     nbr_iterations,
 ):
-    # For instance, we intialize the population randomly
-    population = [
-        [randint(0, g.num_vertices) for i in range(g.num_vertices)]
-        for _ in range(pool_size)
-    ]
+
+    population = init_population(g, pool_size)
 
     for _ in range(nbr_iterations):
         if len(population) == 1:
             break
-
         population = selection(population, selection_strategy, selection_percentage)
+
         new = crossing_in_pool(
             g, pool_size, population, crossing_proba, num_of_matings, crossing_manner
         )
@@ -206,5 +222,5 @@ def measure_genetic_algorithm(
     print("==== solution ====")
     print("Number of vertices: ", g.num_vertices)
     print("Number of colors: ", g.optimum)
-    print("Colors: ", g.colors)
-    print("Execution time: ", end_time - start_time)
+    # print("Colors: ", g.colors)
+    # print("Execution time: ", end_time - start_time)
