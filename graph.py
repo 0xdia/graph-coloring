@@ -204,12 +204,12 @@ class graph:
         Mettre a jour la solution si new_solution est meilleur.
         """
         num_of_colors = len(set(new_solution))
-        if num_of_colors > self.optimum:
+        if num_of_colors < self.optimum:
             self.optimum = num_of_colors
             self.colors = new_solution
             return True
         return False
-        
+
     def validate_solution(self):
         """
         Retourner Vrai si la coloration du graphe est valide.
