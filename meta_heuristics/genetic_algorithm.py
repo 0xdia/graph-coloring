@@ -1,7 +1,7 @@
 from random import randint, seed, uniform
-from time import time
+import time
 
-seed(time())  # initialize the seed
+seed(time.time())  # initialize the seed
 
 
 def selection(population, strategy="random", percentage=0.5):
@@ -114,9 +114,7 @@ def crossing_in_pool(g, pool_size, population, crossing_proba, num_of_matings, m
                 continue
 
             for _ in range(num_of_matings):
-                child_1, child_2 = crossing(
-                    population[i], population[j], manner
-                )
+                child_1, child_2 = crossing(population[i], population[j], manner)
 
                 if not individual_dies(g, child_1) and child_1 not in new_population:
                     new_population.append(child_1)
@@ -138,6 +136,7 @@ def mutation(individual):
 
     individual[gene] = colors[new_gene]
 
+
 def mutation_in_pool(g, population, mutation_proba):
     new = []
     for individual in population:
@@ -146,7 +145,10 @@ def mutation_in_pool(g, population, mutation_proba):
             mutation(individual)
         if not individual_dies(g, individual):
             new.append(individual)
+            # check if individual is the best fitting to update the solution
+            g.update_solution(individual)
     return new
+
 
 def genetic_algorithm(
     g,
@@ -169,16 +171,40 @@ def genetic_algorithm(
         if len(population) == 1:
             break
 
-        print("====> size of pop before selection = ", len(population))
         population = selection(population, selection_strategy, selection_percentage)
-        print("size of pop after selection = ", len(population))
         new = crossing_in_pool(
             g, pool_size, population, crossing_proba, num_of_matings, crossing_manner
         )
-        print("size of pop after crossing = ", len(new))
-        new = mutation_in_pool(g, new, mutation_proba)     
-        print("size of pop after mutation = ", len(new))
+        new = mutation_in_pool(g, new, mutation_proba)
         population = new.copy()
 
-        
-        
+
+def measure_genetic_algorithm(
+    g,
+    pool_size,
+    selection_strategy,
+    selection_percentage,
+    crossing_proba,
+    num_of_matings,
+    crossing_manner,
+    mutation_proba,
+    nbr_iterations,
+):
+    start_time = time.time()
+    genetic_algorithm(
+        g,
+        pool_size,
+        selection_strategy,
+        selection_percentage,
+        crossing_proba,
+        num_of_matings,
+        crossing_manner,
+        mutation_proba,
+        nbr_iterations,
+    )
+    end_time = time.time()
+    print("==== solution ====")
+    print("Number of vertices: ", g.num_vertices)
+    print("Number of colors: ", g.optimum)
+    print("Colors: ", g.colors)
+    print("Execution time: ", end_time - start_time)
