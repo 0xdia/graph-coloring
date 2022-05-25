@@ -4,6 +4,7 @@ from .genetic_algo_steps.crossing import crossing_in_pool
 from .genetic_algo_steps.initialize_population import init_population
 from .genetic_algo_steps.mutation import mutation_in_pool
 from .genetic_algo_steps.selection import selection
+from .genetic_algo_steps.replacement import replacement
 
 
 def genetic_algorithm(
@@ -13,7 +14,7 @@ def genetic_algorithm(
     selection_percentage,
     crossing_proba,
     num_of_matings=1,
-    crossing_manner="uniform",
+    crossing_manner="1",
     mutation_proba=0.5,
     nbr_iterations=100,
 ):
@@ -25,11 +26,18 @@ def genetic_algorithm(
         # print(f"[*] Generation {_}, Population size = {len(population)}")
         if len(population) == 1:
             break
-        population = selection(population, selection_strategy, selection_percentage)
-        new = crossing_in_pool(
-            g, pool_size, population, crossing_proba, num_of_matings, crossing_manner
+        population = selection(
+            population, pool_size, selection_strategy, selection_percentage
         )
+        print(f"After selection: {len(population)}")
+        new = crossing_in_pool(
+            g, population, crossing_proba, num_of_matings, crossing_manner
+        )
+        print(f"After crossing: {len(new)}")
         new = mutation_in_pool(g, new, mutation_proba)
+        print(f"After mutation: {len(new)}")
+        new = replacement(new, pool_size)
+        print(f"After replacement: {len(new)}")
         population = new.copy()
 
 

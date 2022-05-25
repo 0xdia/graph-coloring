@@ -21,8 +21,8 @@ if __name__ == "__main__":
         pool_size=400,
         selection_strategy="roulette",
         selection_percentage=0.6,
-        crossing_proba=0.7,
-        crossing_manner="uniforme",
+        crossing_proba=0.8,
+        crossing_manner="1",
         mutation_proba=0.5,
         nbr_iterations=25,
     )
