@@ -9,7 +9,10 @@ def individual_dies(g, individual):
     return not g.validate_solution()
 
 
-def roulette(population, percentage):
+def roulette(population, percentage=0.5):
+    if len(population) == 1:
+        return [population[0]]
+
     pool = []
     unique_colors = [len(set(individual)) for individual in population]
     n = sum(unique_colors)
@@ -43,8 +46,14 @@ def tournament(population):
     pass
 
 
-def ranking(population):
-    pass
+def ranking(population, percentage=0.5, pool_size=None):
+    weighted_population = [(len(individual), individual) for individual in population]
+    weighted_population.sort()
+    if pool_size:
+        return [
+            weighted_population[_][1] for _ in range(min(len(population), pool_size))
+        ]
+    return None
 
 
 def random(population):
