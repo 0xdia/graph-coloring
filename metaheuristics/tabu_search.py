@@ -3,6 +3,7 @@ from random import randrange
 from heuristics.d_satur import d_satur
 import time
 
+
 def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
     # graph is assumed to be the adjacency matrix of an undirected graph with no self-loops
     # nodes are represented with indices, [0, 1, ..., n-1]
@@ -13,7 +14,7 @@ def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
     iterations = 0
     # initialize tabu as empty queue
     tabu = deque()
-    
+
     # solution is a map of nodes to colors
     # Generate a random solution:
     solution = []
@@ -28,8 +29,10 @@ def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
         move_candidates = set()  # use a set to avoid duplicates
         conflict_count = 0
         for i in range(graph.num_vertices):
-            for j in range(i+1, graph.num_vertices):  # assume undirected graph, ignoring self-loops
-                if graph.adj_matrix[i][j] > 0: # adjacent
+            for j in range(
+                i + 1, graph.num_vertices
+            ):  # assume undirected graph, ignoring self-loops
+                if graph.adj_matrix[i][j] > 0:  # adjacent
                     if solution[i] == solution[j]:  # same color
                         move_candidates.add(i)
                         move_candidates.add(j)
@@ -45,7 +48,7 @@ def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
         for r in range(reps):
             # Choose a node to move.
             node = move_candidates[randrange(0, len(move_candidates))]
-            
+
             # Choose color other than current.
             new_color = colors[randrange(0, len(colors) - 1)]
             if solution[node] == new_color:
@@ -58,31 +61,41 @@ def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
             # Count adjacent pairs with the same color in the new solution.
             new_conflicts = 0
             for i in range(graph.num_vertices):
-                for j in range(i+1, graph.num_vertices):
-                    if graph.adj_matrix[i][j] > 0 and new_solution[i] == new_solution[j]:
+                for j in range(i + 1, graph.num_vertices):
+                    if (
+                        graph.adj_matrix[i][j] > 0
+                        and new_solution[i] == new_solution[j]
+                    ):
                         new_conflicts += 1
             if new_conflicts < conflict_count:  # found an improved solution
                 # if f(s') <= A(f(s)) [where A(z) defaults to z - 1]
-                if new_conflicts <= aspiration_level.setdefault(conflict_count, conflict_count - 1):
+                if new_conflicts <= aspiration_level.setdefault(
+                    conflict_count, conflict_count - 1
+                ):
                     # set A(f(s) = f(s') - 1
                     aspiration_level[conflict_count] = new_conflicts - 1
 
-                    if (node, new_color) in tabu: # permit tabu move if it is better any prior
+                    if (
+                        node,
+                        new_color,
+                    ) in tabu:  # permit tabu move if it is better any prior
                         tabu.remove((node, new_color))
                         if debug:
-                            print("tabu permitted;", conflict_count, "->", new_conflicts)
+                            print(
+                                "tabu permitted;", conflict_count, "->", new_conflicts
+                            )
                         break
                 else:
                     if (node, new_color) in tabu:
                         # tabu move isn't good enough
                         continue
                 if debug:
-                    print (conflict_count, "->", new_conflicts)
+                    print(conflict_count, "->", new_conflicts)
                 break
 
         # At this point, either found a better solution,
         # or ran out of reps, using the last solution generated
-        
+
         # The current node color will become tabu.
         # add to the end of the tabu queue
         tabu.append((node, solution[node]))
@@ -95,7 +108,7 @@ def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
         if debug and iterations % 500 == 0:
             print("iteration:", iterations)
 
-    #print("Aspiration Levels:\n" + "\n".join([str((k,v)) for k,v in aspiration_level.items() if k-v > 1]))
+    # print("Aspiration Levels:\n" + "\n".join([str((k,v)) for k,v in aspiration_level.items() if k-v > 1]))
 
     # At this point, either conflict_count is 0 and a coloring was found,
     # or ran out of iterations with no valid coloring.
@@ -106,13 +119,14 @@ def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
         graph.colors = solution.copy()
         graph.optimum = len(set(solution))
 
+
 def measure_tabu(g, tabu_size=7, reps=100, max_iterations=10000, debug=False):
     """
     Measure the time it takes to color a graph using DSatur heuristic.
     * g: the graph to be colored.
     """
     start_time = time.time()
-    tabucol(g,tabu_size, reps, max_iterations, debug)
+    tabucol(g, tabu_size, reps, max_iterations, debug)
     end_time = time.time()
 
     print(f"Number of vertices: {g.num_vertices}, number of edges: {g.num_edges}")
