@@ -47,24 +47,16 @@ def crossing(father, mother, manner="1"):
     )
 
 
-def crossing_in_pool(g, population, crossing_proba, num_of_matings, manner):
-    new_population = population.copy()
-    for i in range(len(population)):
-        proba = uniform(0.0, 0.99)
-        if proba > crossing_proba:
-            continue
+def crossing_in_pool(g, population, crossing_proba, manner="uniform"):
+    initial_pop_size = len(population)
+    will_cross = [i for i in range(initial_pop_size) if uniform(0.0, 0.99) < crossing_proba]
 
-        for j in range(len(population)):
-            proba = uniform(0.0, 0.99)
-            if proba > crossing_proba or i == j:
+    for father in will_cross:
+        for mother in will_cross or uniform(0.0, 0.99) >= crossing_proba:
+            if father == mother:
                 continue
 
-            for _ in range(num_of_matings):
-                child_1, child_2 = crossing(population[i], population[j], manner)
-
-                if not individual_dies(g, child_1) and child_1 not in new_population:
-                    new_population.append(child_1)
-                if not individual_dies(g, child_2) and child_2 not in new_population:
-                    new_population.append(child_2)
-
-    return new_population
+            children = crossing(population[father], population[mother], manner)
+            for child in children:
+                if not individual_dies(g, child) and child not in population:
+                    population.append(child)
