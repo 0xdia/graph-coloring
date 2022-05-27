@@ -4,6 +4,45 @@ import matplotlib.pyplot as plt
 import numpy as np
 from .genetic_algorithm import genetic_algorithm
 
+def crossing_probability_impact(g):
+    new_list = range(math.floor(0), math.ceil(g.num_vertices + 1))
+    plt.yticks(new_list)
+
+    num_iterations = 50
+    probabilities = [0.0, 0.2, 0.5, 0.8, 1.0]
+    iterations = list(range(num_iterations))
+
+    for proba in probabilities:
+        print(f"[++++] crossing proba = {proba}")
+        # the evolution of the optimum through the generations per num_generations
+        result = genetic_algorithm(
+            g,
+            pool_size=200,
+            selection_strategy="roulette",
+            selection_percentage=0.6,
+            crossing_proba=proba,
+            crossing_manner="1",
+            mutation_proba=0.5,
+            nbr_iterations=50,
+            param_tuning=True,
+        )
+
+        if len(result) < num_iterations:
+            result.extend([result[-1]] * (num_iterations - len(result)))
+        plt.plot(iterations, result, label=str(proba))
+
+        print(f"optimum = {g.optimum}")
+        # re-init the the graph
+        g.re_initialize_graph()
+        print(f"reinit = {g.optimum}")
+
+    plt.ylabel("optimal number of colors")
+    plt.title("Impact of crossing probability")
+    plt.legend(loc="best")
+    plt.savefig("./benchmark/crossing_probability_impact.png", bbox_inches="tight")
+    plt.show()
+
+
 def mutation_probability_impact(g):
     new_list = range(math.floor(0), math.ceil(g.num_vertices + 1))
     plt.yticks(new_list)
