@@ -184,6 +184,13 @@ class graph:
             print("Wrong file or file path")
             exit()
 
+    def re_initialize_graph(self):
+        """
+        Re-initialiser le graphe.
+        """
+        self.colors = [-1 for _ in range(self.num_vertices)]
+        self.optimum = self.num_vertices
+
     def get_neighbors(self, vertex):
         """
         Retourner les voisins du sommet.
