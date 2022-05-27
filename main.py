@@ -23,7 +23,7 @@ if __name__ == "__main__":
     # measure_rlf(g)
     # measure_d_satur(g)
     # measured_branch_and_bound(g, False, False)
-    measure_tabu(g)
+    measure_tabu(g, 20)
 
     g.validate_solution()
     # g.visualize_graph()

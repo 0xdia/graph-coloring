@@ -4,12 +4,13 @@ from heuristics.d_satur import d_satur
 import time
 
 
-def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
+def tabucol(
+    graph, number_of_colors, tabu_size=7, reps=100, max_iterations=10000, debug=False
+):
     # graph is assumed to be the adjacency matrix of an undirected graph with no self-loops
     # nodes are represented with indices, [0, 1, ..., n-1]
     # colors are represented by numbers, [0, 1, ..., k-1]
-    d_satur(graph)
-    colors = list(range(graph.optimum))
+    colors = list(range(number_of_colors))
     # number of iterations of the tabucol algorithm
     iterations = 0
     # initialize tabu as empty queue
@@ -120,13 +121,15 @@ def tabucol(graph, tabu_size=7, reps=100, max_iterations=10000, debug=False):
         graph.optimum = len(set(solution))
 
 
-def measure_tabu(g, tabu_size=7, reps=100, max_iterations=10000, debug=False):
+def measure_tabu(
+    g, number_of_colors, tabu_size=7, reps=100, max_iterations=10000, debug=False
+):
     """
-    Measure the time it takes to color a graph using DSatur heuristic.
+    Measure the time it takes to color a graph using tabu search meta-heuristic.
     * g: the graph to be colored.
     """
     start_time = time.time()
-    tabucol(g, tabu_size, reps, max_iterations, debug)
+    tabucol(g, number_of_colors, tabu_size, reps, max_iterations, debug)
     end_time = time.time()
 
     print(f"Number of vertices: {g.num_vertices}, number of edges: {g.num_edges}")
