@@ -13,32 +13,35 @@ def genetic_algorithm(
     selection_strategy,
     selection_percentage,
     crossing_proba,
-    num_of_matings=1,
     crossing_manner="1",
     mutation_proba=0.5,
     nbr_iterations=100,
+    param_tuning=False,
 ):
 
     population = init_population(g, pool_size)
+    optimum_convergence = []
+    if param_tuning:
+        optimum_convergence.append(g.optimum)
 
-    for _ in range(nbr_iterations + 1):
-        print(f"[*] Generation {_}")
-        # print(f"[*] Generation {_}, Population size = {len(population)}")
+    for _ in range(nbr_iterations-1):
+        print(f"Generation = {_+1}")
         if len(population) == 1:
             break
-        population = selection(
-            population, pool_size, selection_strategy, selection_percentage
-        )
-        print(f"After selection: {len(population)}")
-        new = crossing_in_pool(
-            g, population, crossing_proba, num_of_matings, crossing_manner
-        )
-        print(f"After crossing: {len(new)}")
-        new = mutation_in_pool(g, new, mutation_proba)
-        print(f"After mutation: {len(new)}")
-        new = replacement(new, pool_size)
-        print(f"After replacement: {len(new)}")
-        population = new.copy()
+        print(f"before selection, pop size = {len(population)}")
+        population = selection(population, selection_strategy, selection_percentage)
+        #print(f"before crossing, pop size = {len(population)}")
+        crossing_in_pool(g, population, crossing_proba, crossing_manner)
+        #print(f"before mutation, pop size = {len(population)}")
+        new = mutation_in_pool(g, population, mutation_proba)
+        #print(f"before replacement, pop size = {len(population)}")
+        population = replacement(new, pool_size)
+        # population = new.copy()
+
+        if param_tuning:
+            optimum_convergence.append(g.optimum)
+
+    return optimum_convergence
 
 
 def measure_genetic_algorithm(
