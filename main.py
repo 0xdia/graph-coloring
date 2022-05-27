@@ -1,10 +1,6 @@
 import sys
 from graph import graph
-from exact_methods.branch_and_bound import measured_branch_and_bound
-from exact_methods.dynamic_programming import measured_dp
-from heuristics.RLF import measure_rlf
-from heuristics.d_satur import measure_d_satur
-from metaheuristics.tabu_search import measure_tabu
+from meta_heuristics.tabu_search import measure_tabu
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
