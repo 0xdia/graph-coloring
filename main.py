@@ -1,9 +1,13 @@
 import sys
 from graph import graph
+
+from meta_heuristics.tabu_search import measure_tabu
+
 from meta_heuristics.genetic_algorithm import (
     genetic_algorithm,
     measure_genetic_algorithm,
 )
+
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
@@ -27,6 +31,7 @@ if __name__ == "__main__":
         nbr_iterations=25,
     )
     # Colorer le graphe g et mesure le temps que ça prend.
+    measure_tabu(g, 20)
 
     g.validate_solution()
     # g.visualize_graph()
