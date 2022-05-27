@@ -1,11 +1,11 @@
 import sys
 from graph import graph
 
-from meta_heuristics.genetic_algo_params_tuning import (
-    pool_size_impact,
-    num_generations_impact,
-    mutation_probability_impact,
-    crossing_probability_impact,
+from meta_heuristics.tabu_search import measure_tabu
+
+from meta_heuristics.genetic_algorithm import (
+    genetic_algorithm,
+    measure_genetic_algorithm,
 )
 
 if __name__ == "__main__":
@@ -20,4 +20,6 @@ if __name__ == "__main__":
     g = graph()
     g.read(input_file)
 
-    crossing_probability_impact(g)
+    # Colorer le graphe g et mesure le temps que ça prend.
+    # choisir une algorithe et l'appeler ici
+    print("choose an algorithm")
