@@ -51,8 +51,8 @@ def crossing_in_pool(g, population, crossing_proba, manner="uniform"):
     initial_pop_size = len(population)
     # will_cross = [i for i in range(initial_pop_size) if uniform(0.0, 0.99) < crossing_proba]
 
-    for father in range(initial_pop_size//2):
-        for mother in range(initial_pop_size//2, initial_pop_size):
+    for father in range(initial_pop_size // 2):
+        for mother in range(initial_pop_size // 2, initial_pop_size):
             if uniform(0.0, 0.99) >= crossing_proba:
                 continue
 

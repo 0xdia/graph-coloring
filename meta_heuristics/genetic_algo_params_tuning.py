@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from .genetic_algorithm import genetic_algorithm
 
+
 def crossing_probability_impact(g):
     new_list = range(math.floor(0), math.ceil(g.num_vertices + 1))
     plt.yticks(new_list)
@@ -13,8 +14,6 @@ def crossing_probability_impact(g):
     iterations = list(range(num_iterations))
 
     for proba in probabilities:
-        print(f"[++++] crossing proba = {proba}")
-        # the evolution of the optimum through the generations per num_generations
         result = genetic_algorithm(
             g,
             pool_size=200,
@@ -31,10 +30,8 @@ def crossing_probability_impact(g):
             result.extend([result[-1]] * (num_iterations - len(result)))
         plt.plot(iterations, result, label=str(proba))
 
-        print(f"optimum = {g.optimum}")
         # re-init the the graph
         g.re_initialize_graph()
-        print(f"reinit = {g.optimum}")
 
     plt.ylabel("optimal number of colors")
     plt.title("Impact of crossing probability")
@@ -52,8 +49,6 @@ def mutation_probability_impact(g):
     iterations = list(range(num_iterations))
 
     for proba in probabilities:
-        print(f"[++++] mutation proba = {proba}")
-        # the evolution of the optimum through the generations per num_generations
         result = genetic_algorithm(
             g,
             pool_size=200,
@@ -70,10 +65,8 @@ def mutation_probability_impact(g):
             result.extend([result[-1]] * (num_iterations - len(result)))
         plt.plot(iterations, result, label=str(proba))
 
-        print(f"optimum = {g.optimum}")
         # re-init the the graph
         g.re_initialize_graph()
-        print(f"reinit = {g.optimum}")
 
     plt.ylabel("optimal number of colors")
     plt.title("Impact of the mutation probability")
@@ -90,8 +83,6 @@ def num_generations_impact(g):
     iterations = list(range(num_generations[-1]))
 
     for num in num_generations:
-        print(f"[++++] num of generations = {num}")
-        # the evolution of the optimum through the generations per num_generations
         result = genetic_algorithm(
             g,
             pool_size=200,
@@ -108,10 +99,8 @@ def num_generations_impact(g):
             result.extend([result[-1]] * (num_generations[-1] - len(result)))
         plt.plot(iterations, result, label=str(num))
 
-        print(f"optimum = {g.optimum}")
         # re-init the the graph
         g.re_initialize_graph()
-        print(f"reinit = {g.optimum}")
 
     plt.ylabel("optimal number of colors")
     plt.title("Impact of the number of generations (iterations)")
@@ -126,11 +115,9 @@ def pool_size_impact(g):
 
     nbr_iterations = 45
     iterations = [_ for _ in range(nbr_iterations)]
-    
+
     pool_sizes = [size for size in range(100, 701, 300)]
     for pool_size in pool_sizes:
-        print(f"[++++++] pool size = {pool_size}")
-        # the evolution of the optimum through the generations per pool_size
         result = genetic_algorithm(
             g,
             pool_size=pool_size,
@@ -147,10 +134,8 @@ def pool_size_impact(g):
             result.extend([result[-1]] * (nbr_iterations - len(result)))
         plt.plot(iterations, result, label=str(pool_size))
 
-        print(f"optimum = {g.optimum}")
         # re-init the the graph
         g.re_initialize_graph()
-        print(f"reinit = {g.optimum}")
 
     plt.ylabel("optimal number of colors")
     plt.title("Impact of the pool size")

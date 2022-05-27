@@ -1,7 +1,12 @@
 import sys
 from graph import graph
 
-from meta_heuristics.genetic_algo_params_tuning import pool_size_impact, num_generations_impact, mutation_probability_impact, crossing_probability_impact
+from meta_heuristics.genetic_algo_params_tuning import (
+    pool_size_impact,
+    num_generations_impact,
+    mutation_probability_impact,
+    crossing_probability_impact,
+)
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
