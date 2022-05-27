@@ -1,6 +1,13 @@
 import sys
 from graph import graph
+
 from meta_heuristics.tabu_search import measure_tabu
+
+from meta_heuristics.genetic_algorithm import (
+    genetic_algorithm,
+    measure_genetic_algorithm,
+)
+
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
@@ -13,12 +20,17 @@ if __name__ == "__main__":
     # Créer un graphe à partir du fichier d'entrée.
     g = graph()
     g.read(input_file)
-
+    measure_genetic_algorithm(
+        g,
+        pool_size=400,
+        selection_strategy="roulette",
+        selection_percentage=0.6,
+        crossing_proba=0.8,
+        crossing_manner="1",
+        mutation_proba=0.5,
+        nbr_iterations=25,
+    )
     # Colorer le graphe g et mesure le temps que ça prend.
-    # measured_dp(g)
-    # measure_rlf(g)
-    # measure_d_satur(g)
-    # measured_branch_and_bound(g, False, False)
     measure_tabu(g, 20)
 
     g.validate_solution()
