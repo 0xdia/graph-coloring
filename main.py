@@ -22,4 +22,4 @@ if __name__ == "__main__":
 
     # Colorer le graphe g et mesure le temps que ça prend.
     # choisir une algorithe et l'appeler ici
-    print("choose an algorithm")
+    measure_genetic_algorithm(g, 200, "roulette", 0.5, 0.5, "uniform", 0.5, 100)
