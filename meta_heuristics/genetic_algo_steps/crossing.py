@@ -42,7 +42,7 @@ def crossing(father, mother, manner="1"):
     assert len(father) == len(mother)
     return (
         uniform_crossing(father, mother)
-        if manner == "uniforme"
+        if manner == "uniform"
         else k_points_crossing(father, mother, int(manner))
     )
 
