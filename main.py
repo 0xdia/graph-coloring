@@ -8,6 +8,14 @@ from meta_heuristics.genetic_algorithm import (
     measure_genetic_algorithm,
 )
 
+from meta_heuristics.tabu_search_params_tuning import (
+    number_of_colors_impact,
+    reps_impact,
+    max_iterations_impact,
+    tabu_size_impact,
+)
+from meta_heuristics.genetic_algo_params_tuning import crossing_probability_impact
+
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
     if len(sys.argv) != 2:
@@ -23,3 +31,4 @@ if __name__ == "__main__":
     # Colorer le graphe g et mesure le temps que ça prend.
     # choisir une algorithe et l'appeler ici
     print("choose an algorithm")
+    number_of_colors_impact(g)
