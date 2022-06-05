@@ -25,6 +25,5 @@ def mutation_in_pool(g, population, mutation_proba):
         if not individual_dies(g, individual):
             new.append(individual)
             # check if individual is the best fitting to update the solution
-            if g.update_solution(individual):
-                print("solution updated!")
+            g.update_solution(individual)
     return new

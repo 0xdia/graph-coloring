@@ -3,17 +3,24 @@ import matplotlib.pyplot as plt
 
 import numpy as np
 from .genetic_algorithm import genetic_algorithm
+from time import time
 
 
-def crossing_probability_impact(g):
-    new_list = range(math.floor(0), math.ceil(g.num_vertices + 1))
-    plt.yticks(new_list)
+def crossing_probability_impact(g, file_name):
+    figure, axis = plt.subplots(1, 2)
+    axis[0].set_title("Nombres des couleurs optimums")
+    axis[0].legend(loc="best")
+    axis[0].set_yticks(range(math.floor(0), math.ceil(g.num_vertices + 1)))
+    axis[1].set_title("Temps d'execution")
+    axis[1].legend(loc="best")
 
     num_iterations = 50
     probabilities = [0.0, 0.2, 0.5, 0.8, 1.0]
     iterations = list(range(num_iterations))
 
+    times = []
     for proba in probabilities:
+        start = time()
         result = genetic_algorithm(
             g,
             pool_size=200,
@@ -25,18 +32,24 @@ def crossing_probability_impact(g):
             nbr_iterations=50,
             param_tuning=True,
         )
-
+        times.append(time() - start)
         if len(result) < num_iterations:
             result.extend([result[-1]] * (num_iterations - len(result)))
-        plt.plot(iterations, result, label=str(proba))
+        axis[0].plot(iterations, result, label=str(proba))
 
         # re-init the the graph
         g.re_initialize_graph()
 
-    plt.ylabel("optimal number of colors")
-    plt.title("Impact of crossing probability")
-    plt.legend(loc="best")
-    plt.savefig("./benchmark/crossing_probability_impact.png", bbox_inches="tight")
+    axis[0].set_yticks(range(math.floor(0), math.ceil(max(times))))
+    axis[1].plot(probabilities, times)
+    
+    
+    axis[0].legend()
+    axis[1].legend()
+    # plt.legend(loc="best")
+    plt.savefig(
+        f"./benchmark/genetic_algorithm/{file_name}/crossing_probability_impact.png", bbox_inches="tight"
+    )
     plt.show()
 
 
