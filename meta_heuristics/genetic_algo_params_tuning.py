@@ -17,11 +17,12 @@ def crossing_probability_impact(g, file_name):
     axis[1].set_xlabel("Crossing probabilities")
     axis[1].set_ylabel("Temps d'execution")
 
-    num_iterations = 50
+    num_iterations = 40
     probabilities = [0.2, 0.4, 0.6, 0.8, 1.0]
     iterations = list(range(num_iterations))
 
     times = []
+    optimums = []
     min_optimum, max_optimum = g.num_vertices, 0
     for proba in probabilities:
         print(proba)
@@ -38,6 +39,7 @@ def crossing_probability_impact(g, file_name):
             param_tuning=True,
         )
         times.append(time() - start)
+        optimums.append(result[-1])
         if len(result) < num_iterations:
             result.extend([result[-1]] * (num_iterations - len(result)))
         min_optimum = min(min_optimum, min(result))
@@ -47,21 +49,28 @@ def crossing_probability_impact(g, file_name):
         # re-init the the graph
         g.re_initialize_graph()
 
+    with open(f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\crossing_probability_impact.txt", 'w+') as f:
+        f.write(f"probabilities =  {probabilities}\r\n")
+        f.write(f"times =  {times}\r\n")
+        f.write(f"optimums =  {optimums}\r\n")
+        f.close()
     print("times = ", times)
     print("iterations = ", iterations)
     print("optimums = ", result)
-    
     axis[0].set_yticks(range(math.floor(0), math.ceil(max(times))))
     axis[0].set_yticks(range(math.floor(min_optimum), math.ceil(max_optimum)))
+    axis[0].set_ylim(bottom = min_optimum - 1, top = max_optimum)
     axis[1].plot(probabilities, times)
     
     
     axis[0].legend()
     axis[1].legend()
     plt.savefig(
-        f"./benchmark/genetic_algorithm/{file_name}/crossing_probability_impact.png", bbox_inches="tight"
+        f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\crossing_probability_impact.png", bbox_inches="tight"
     )
     plt.show()
+    
+
 
 
 def mutation_probability_impact(g):

@@ -23,7 +23,7 @@ if __name__ == "__main__":
     # Créer un graphe à partir du fichier d'entrée.
     g = graph()
     g.read(input_file)
-    file_name = input_file.split("/")[-1].split(".")[0]
+    file_name = input_file.split("\\")[-1].split(".")[0]
     # Colorer le graphe g et mesure le temps que ça prend.
     # choisir une algorithe et l'appeler ici
 
