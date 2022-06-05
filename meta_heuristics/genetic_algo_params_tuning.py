@@ -10,16 +10,21 @@ def crossing_probability_impact(g, file_name):
     figure, axis = plt.subplots(1, 2)
     axis[0].set_title("Nombres des couleurs optimums")
     axis[0].legend(loc="best")
-    axis[0].set_yticks(range(math.floor(0), math.ceil(g.num_vertices + 1)))
+    axis[0].set_xlabel("Iterations")
+    axis[0].set_ylabel("Optimal number of colors")
     axis[1].set_title("Temps d'execution")
     axis[1].legend(loc="best")
+    axis[1].set_xlabel("Crossing probabilities")
+    axis[1].set_ylabel("Temps d'execution")
 
     num_iterations = 50
-    probabilities = [0.0, 0.2, 0.5, 0.8, 1.0]
+    probabilities = [0.2, 0.4, 0.6, 0.8, 1.0]
     iterations = list(range(num_iterations))
 
     times = []
+    min_optimum, max_optimum = g.num_vertices, 0
     for proba in probabilities:
+        print(proba)
         start = time()
         result = genetic_algorithm(
             g,
@@ -29,24 +34,30 @@ def crossing_probability_impact(g, file_name):
             crossing_proba=proba,
             crossing_manner="1",
             mutation_proba=0.5,
-            nbr_iterations=50,
+            nbr_iterations=40,
             param_tuning=True,
         )
         times.append(time() - start)
         if len(result) < num_iterations:
             result.extend([result[-1]] * (num_iterations - len(result)))
+        min_optimum = min(min_optimum, min(result))
+        max_optimum = max(max_optimum, max(result))
         axis[0].plot(iterations, result, label=str(proba))
 
         # re-init the the graph
         g.re_initialize_graph()
 
+    print("times = ", times)
+    print("iterations = ", iterations)
+    print("optimums = ", result)
+    
     axis[0].set_yticks(range(math.floor(0), math.ceil(max(times))))
+    axis[0].set_yticks(range(math.floor(min_optimum), math.ceil(max_optimum)))
     axis[1].plot(probabilities, times)
     
     
     axis[0].legend()
     axis[1].legend()
-    # plt.legend(loc="best")
     plt.savefig(
         f"./benchmark/genetic_algorithm/{file_name}/crossing_probability_impact.png", bbox_inches="tight"
     )
