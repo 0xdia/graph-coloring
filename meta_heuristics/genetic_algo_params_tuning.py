@@ -173,7 +173,7 @@ def num_generations_impact(g, file_name):
             crossing_proba=0.6,
             crossing_manner="1",
             mutation_proba=0.5,
-            nbr_iterations=num,
+            nbr_iterations=40,
             param_tuning=True,
         )
         
@@ -192,8 +192,8 @@ def num_generations_impact(g, file_name):
         # re-init the the graph
         g.re_initialize_graph()
     
-    with open(f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\num_generations_impact.txt", 'w+') as f:
-        f.write(f"probabilities =  {num_generations}\r\n")
+    with open(f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\\num_generations_impact.txt", 'w+') as f:
+        f.write(f"probabilities =  {probabilities}\r\n")
         f.write(f"times =  {times}\r\n")
         f.write(f"optimums =  {optimums}\r\n")
         f.close()
@@ -203,12 +203,13 @@ def num_generations_impact(g, file_name):
     axis[0].set_yticks(range(math.floor(0), math.ceil(max(times))))
     axis[0].set_yticks(range(math.floor(min_optimum), math.ceil(max_optimum)))
     axis[0].set_ylim(bottom = min_optimum - 1, top = max_optimum)
-    axis[1].plot(num_generations, times)
+    axis[1].plot(probabilities, times)
+    
     
     axis[0].legend()
     axis[1].legend()
     plt.savefig(
-        f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\num_generations_impact.png", bbox_inches="tight"
+        f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\\num_generations_impact.png", bbox_inches="tight"
     )
     plt.show()
 
