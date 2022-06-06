@@ -1,20 +1,6 @@
 import sys
 from graph import graph
 
-from meta_heuristics.tabu_search import measure_tabu
-
-from meta_heuristics.genetic_algorithm import (
-    genetic_algorithm,
-    measure_genetic_algorithm,
-)
-
-from meta_heuristics.genetic_algo_params_tuning import (
-    num_generations_impact,
-    pool_size_impact,
-)
-
-from exact_methods.branch_and_bound import measured_branch_and_bound
-
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
     if len(sys.argv) != 2:
@@ -26,8 +12,7 @@ if __name__ == "__main__":
     # Créer un graphe à partir du fichier d'entrée.
     g = graph()
     g.read(input_file)
-    file_name = input_file.split("\\")[-1].split(".")[0]
+    # file_name = input_file.split("\\")[-1].split(".")[0]
     # Colorer le graphe g et mesure le temps que ça prend.
     # choisir une algorithe et l'appeler ici
-
-    pool_size_impact(g, file_name)
+    print("choose input file")
