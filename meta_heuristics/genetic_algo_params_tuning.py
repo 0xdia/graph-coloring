@@ -217,6 +217,18 @@ def pool_size_impact(g, file_name):
     axis[1].set_xlabel("Pool sizes")
     axis[1].set_ylabel("Temps d'execution")
 
+
+def pool_size_impact(g, file_name):
+    figure, axis = plt.subplots(1, 2)
+    axis[0].set_title("Nombres des couleurs optimums")
+    axis[0].legend(loc="best")
+    axis[0].set_xlabel("Iterations")
+    axis[0].set_ylabel("Optimal number of colors")
+    axis[1].set_title("Temps d'execution")
+    axis[1].legend(loc="best")
+    axis[1].set_xlabel("Pool sizes")
+    axis[1].set_ylabel("Temps d'execution")
+
     nbr_iterations = 100
     iterations = list(range(nbr_iterations))
     times = []
@@ -250,7 +262,7 @@ def pool_size_impact(g, file_name):
         g.re_initialize_graph()
 
     with open(
-        f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\\pool_sizes_impact.txt",
+        f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\pool_sizes_impact.txt",
         "w+",
     ) as f:
         f.write(f"pool_sizes =  {pool_sizes}\r\n")
@@ -266,7 +278,7 @@ def pool_size_impact(g, file_name):
     axis[0].legend()
     axis[1].legend()
     plt.savefig(
-        f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\\pool_sizes_impact.png",
+        f"D:\graph-coloring\\benchmark\genetic_algorithm\{file_name}\pool_sizes_impact.png",
         bbox_inches="tight",
     )
     plt.show()

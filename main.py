@@ -8,7 +8,10 @@ from meta_heuristics.genetic_algorithm import (
     measure_genetic_algorithm,
 )
 
-from meta_heuristics.genetic_algo_params_tuning import num_generations_impact, pool_size_impact
+from meta_heuristics.genetic_algo_params_tuning import (
+    num_generations_impact,
+    pool_size_impact,
+)
 
 from exact_methods.branch_and_bound import measured_branch_and_bound
 
