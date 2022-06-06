@@ -35,4 +35,4 @@ if __name__ == "__main__":
     reps_impact(g)
     max_iterations_impact(g)
     tabu_size_impact(g)
-    #measure_genetic_algorithm(g, 200, "roulette", 0.5, 0.5, "uniform", 0.5, 100)
+    # measure_genetic_algorithm(g, 200, "roulette", 0.5, 0.5, "uniform", 0.5, 100)
