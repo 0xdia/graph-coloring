@@ -16,7 +16,7 @@ def number_of_colors_impact(g):
 
     reps = 400
     max_iterations = 10000
-    number_of_colors_list = list(range(15, 500, 5))
+    number_of_colors_list = list(range(40, 500, 5))
     tabu_size = 7
     optimums = []
     times = []
@@ -30,7 +30,8 @@ def number_of_colors_impact(g):
         g.re_initialize_graph()
 
     with open(
-        "./benchmark/tabu_search/huck/initial_number_of_colors_impact_values.txt", "w+"
+        "./benchmark/tabu_search/mulsol.i.4/initial_number_of_colors_impact_values.txt",
+        "w+",
     ) as fp:
         for (optimum, t) in zip(optimums, times):
             fp.write("%s, %s\n" % (optimum, t))
@@ -41,7 +42,7 @@ def number_of_colors_impact(g):
     axis[1].legend()
     plt.legend(loc="best")
     plt.savefig(
-        "./benchmark/tabu_search/huck/initial_number_of_colors_impact.png",
+        "./benchmark/tabu_search/mulsol.i.4/initial_number_of_colors_impact.png",
         bbox_inches="tight",
     )
     plt.show()
@@ -70,7 +71,7 @@ def reps_impact(g):
         # re-init the the graph
         g.re_initialize_graph()
 
-    with open("./benchmark/tabu_search/huck/reps_impact_values.txt", "w+") as fp:
+    with open("./benchmark/tabu_search/mulsol.i.4/reps_impact_values.txt", "w+") as fp:
         for (optimum, t) in zip(optimums, times):
             fp.write("%s, %s\n" % (optimum, t))
 
@@ -79,7 +80,9 @@ def reps_impact(g):
     axis[0].legend()
     axis[1].legend()
     plt.legend(loc="best")
-    plt.savefig("./benchmark/tabu_search/huck/reps_impact.png", bbox_inches="tight")
+    plt.savefig(
+        "./benchmark/tabu_search/mulsol.i.4/reps_impact.png", bbox_inches="tight"
+    )
     plt.show()
 
 
@@ -106,7 +109,7 @@ def max_iterations_impact(g):
         # re-init the the graph
         g.re_initialize_graph()
     with open(
-        "./benchmark/tabu_search/huck/max_iterations_impact_values.txt", "w+"
+        "./benchmark/tabu_search/mulsol.i.4/max_iterations_impact_values.txt", "w+"
     ) as fp:
         for (optimum, t) in zip(optimums, times):
             fp.write("%s, %s\n" % (optimum, t))
@@ -117,7 +120,8 @@ def max_iterations_impact(g):
     axis[1].legend()
     plt.legend(loc="best")
     plt.savefig(
-        "./benchmark/tabu_search/huck/max_iterations_impact.png", bbox_inches="tight"
+        "./benchmark/tabu_search/mulsol.i.4/max_iterations_impact.png",
+        bbox_inches="tight",
     )
     plt.show()
 
@@ -144,7 +148,9 @@ def tabu_size_impact(g):
 
         # re-init the the graph
         g.re_initialize_graph()
-    with open("./benchmark/tabu_search/huck/tabu_size_impact_values.txt", "w+") as fp:
+    with open(
+        "./benchmark/tabu_search/mulsol.i.4/tabu_size_impact_values.txt", "w+"
+    ) as fp:
         for (optimum, t) in zip(optimums, times):
             fp.write("%s, %s\n" % (optimum, t))
 
@@ -154,6 +160,6 @@ def tabu_size_impact(g):
     axis[1].legend()
     plt.legend(loc="best")
     plt.savefig(
-        "./benchmark/tabu_search/huck/tabu_size_impact.png", bbox_inches="tight"
+        "./benchmark/tabu_search/mulsol.i.4/tabu_size_impact.png", bbox_inches="tight"
     )
     plt.show()

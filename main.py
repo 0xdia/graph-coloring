@@ -32,3 +32,6 @@ if __name__ == "__main__":
     # choisir une algorithe et l'appeler ici
     print("choose an algorithm")
     number_of_colors_impact(g)
+    reps_impact(g)
+    max_iterations_impact(g)
+    tabu_size_impact(g)
