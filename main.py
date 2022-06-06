@@ -8,7 +8,7 @@ from meta_heuristics.genetic_algorithm import (
     measure_genetic_algorithm,
 )
 
-from meta_heuristics.genetic_algo_params_tuning import num_generations_impact
+from meta_heuristics.genetic_algo_params_tuning import num_generations_impact, pool_size_impact
 
 from exact_methods.branch_and_bound import measured_branch_and_bound
 
@@ -27,4 +27,4 @@ if __name__ == "__main__":
     # Colorer le graphe g et mesure le temps que ça prend.
     # choisir une algorithe et l'appeler ici
 
-    num_generations_impact(g, file_name)
+    pool_size_impact(g, file_name)
