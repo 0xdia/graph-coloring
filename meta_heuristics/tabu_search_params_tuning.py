@@ -30,11 +30,14 @@ def number_of_colors_impact(g):
         g.re_initialize_graph()
 
     with open(
-        "./benchmark/tabu_search/mulsol.i.4/initial_number_of_colors_impact_values.txt",
+        "./benchmark/tabu_search/games120/initial_number_of_colors_impact_values.txt",
         "w+",
     ) as fp:
-        for (optimum, t) in zip(optimums, times):
-            fp.write("%s, %s\n" % (optimum, t))
+        fp.write("values, optimum, time\n")
+        for (number_of_colors, optimum, t) in zip(
+            number_of_colors_list, optimums, times
+        ):
+            fp.write("%s ,%s, %s\n" % (number_of_colors, optimum, t))
 
     axis[0].plot(number_of_colors_list, optimums)
     axis[1].plot(number_of_colors_list, times)
@@ -42,7 +45,7 @@ def number_of_colors_impact(g):
     axis[1].legend()
     plt.legend(loc="best")
     plt.savefig(
-        "./benchmark/tabu_search/mulsol.i.4/initial_number_of_colors_impact.png",
+        "./benchmark/tabu_search/games120/initial_number_of_colors_impact.png",
         bbox_inches="tight",
     )
     plt.show()
@@ -71,18 +74,17 @@ def reps_impact(g):
         # re-init the the graph
         g.re_initialize_graph()
 
-    with open("./benchmark/tabu_search/mulsol.i.4/reps_impact_values.txt", "w+") as fp:
-        for (optimum, t) in zip(optimums, times):
-            fp.write("%s, %s\n" % (optimum, t))
+    with open("./benchmark/tabu_search/games120/reps_impact_values.txt", "w+") as fp:
+        fp.write("values, optimum, time\n")
+        for (reps_impact, optimum, t) in zip(reps_list, optimums, times):
+            fp.write("%s ,%s, %s\n" % (reps_impact, optimum, t))
 
     axis[0].plot(reps_list, optimums)
     axis[1].plot(reps_list, times)
     axis[0].legend()
     axis[1].legend()
     plt.legend(loc="best")
-    plt.savefig(
-        "./benchmark/tabu_search/mulsol.i.4/reps_impact.png", bbox_inches="tight"
-    )
+    plt.savefig("./benchmark/tabu_search/games120/reps_impact.png", bbox_inches="tight")
     plt.show()
 
 
@@ -109,10 +111,11 @@ def max_iterations_impact(g):
         # re-init the the graph
         g.re_initialize_graph()
     with open(
-        "./benchmark/tabu_search/mulsol.i.4/max_iterations_impact_values.txt", "w+"
+        "./benchmark/tabu_search/games120/max_iterations_impact_values.txt", "w+"
     ) as fp:
-        for (optimum, t) in zip(optimums, times):
-            fp.write("%s, %s\n" % (optimum, t))
+        fp.write("values, optimum, time\n")
+        for (max_iterations, optimum, t) in zip(max_iterations_list, optimums, times):
+            fp.write("%s ,%s, %s\n" % (max_iterations, optimum, t))
 
     axis[0].plot(max_iterations_list, optimums)
     axis[1].plot(max_iterations_list, times)
@@ -120,7 +123,7 @@ def max_iterations_impact(g):
     axis[1].legend()
     plt.legend(loc="best")
     plt.savefig(
-        "./benchmark/tabu_search/mulsol.i.4/max_iterations_impact.png",
+        "./benchmark/tabu_search/games120/max_iterations_impact.png",
         bbox_inches="tight",
     )
     plt.show()
@@ -149,10 +152,11 @@ def tabu_size_impact(g):
         # re-init the the graph
         g.re_initialize_graph()
     with open(
-        "./benchmark/tabu_search/mulsol.i.4/tabu_size_impact_values.txt", "w+"
+        "./benchmark/tabu_search/games120/tabu_size_impact_values.txt", "w+"
     ) as fp:
-        for (optimum, t) in zip(optimums, times):
-            fp.write("%s, %s\n" % (optimum, t))
+        fp.write("values, optimum, time\n")
+        for (tabu_size, optimum, t) in zip(tabu_size_list, optimums, times):
+            fp.write("%s ,%s, %s\n" % (tabu_size, optimum, t))
 
     axis[0].plot(tabu_size_list, optimums)
     axis[1].plot(tabu_size_list, times)
@@ -160,6 +164,6 @@ def tabu_size_impact(g):
     axis[1].legend()
     plt.legend(loc="best")
     plt.savefig(
-        "./benchmark/tabu_search/mulsol.i.4/tabu_size_impact.png", bbox_inches="tight"
+        "./benchmark/tabu_search/games120/tabu_size_impact.png", bbox_inches="tight"
     )
     plt.show()
