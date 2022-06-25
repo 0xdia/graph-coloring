@@ -1,5 +1,6 @@
 import sys
 from graph import graph
+from meta_heuristics.grey_wolf_optimizer.grey_wolf_optimizer import GWO
 
 if __name__ == "__main__":
     # Vérifier la validité d'usage.
@@ -15,4 +16,4 @@ if __name__ == "__main__":
     # file_name = input_file.split("\\")[-1].split(".")[0]
     # Colorer le graphe g et mesure le temps que ça prend.
     # choisir une algorithe et l'appeler ici
-    print("choose input file")
+    GWO(g, 300, 50)

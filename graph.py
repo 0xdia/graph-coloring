@@ -1,7 +1,6 @@
 from math import inf
 import networkx as nx
 import matplotlib.pyplot as plt
-from sklearn import neighbors
 
 
 class graph:
