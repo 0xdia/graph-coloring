@@ -1,6 +1,7 @@
 from math import inf
 import networkx as nx
 import matplotlib.pyplot as plt
+from sklearn import neighbors
 
 
 class graph:
@@ -226,6 +227,18 @@ class graph:
                 return False
             if self.colors[vertex] in self.get_neighbors_colors(vertex, self.colors):
                 return False
+        return True
+
+    def validate_candidate_solution(self, candidate):
+        if len(candidate) != self.num_vertices:
+            return False
+        for vertex in range(self.num_vertices):
+            if candidate[vertex] == -1:
+                return False
+            vertex_neighbors = self.get_neighbors(vertex)
+            for neighbor in vertex_neighbors:
+                if candidate[vertex] == candidate[neighbor]:
+                    return False
         return True
 
     def is_independent_set(self, vertex, independent_set):
