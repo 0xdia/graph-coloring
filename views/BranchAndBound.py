@@ -2,7 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from core.exact_methods.branch_and_bound import branch_and_bound_iterative
+from core.exact_methods.branch_and_bound import measured_branch_and_bound
 from core.graph import graph
 
 from widgets.calculte_button import calculte_button
@@ -10,30 +10,24 @@ from widgets.upload_button import upload_button
 from widgets.table_view import table_view
 
 
-def run(self, weight):
+def run(self):
     g = graph()
-    array = g.read(self.fname[:len(self.fname)-4])
-    tps, Benefice, capacite_prise, resultat = branch_and_bound_iterative(weight, array)
+    print("file< ", self.fname[:len(self.fname)])
+    g.read(self.fname[:len(self.fname)])
+    
+    optimum, exec_time = measured_branch_and_bound(g)
 
     data = {
-        'Best Value': [str(Benefice)],
-        'Current weight': [str(capacite_prise)],
-        'Objects': [],
-        'Duration': [str(tps)]
+        'Nombre de couleur optimal': [str(optimum)],
+        "Temps d'execution": [str(exec_time)],
     }
-
-    while(len(resultat) != 0):
-        s = resultat.pop(len(resultat)-1)
-        data['Objects'].append(
-            "Objet: " + str(s.item) + " => Exemplaires: " + str(s.nbr_item))
 
     showResult(self, data)
 
 
 def branchTab(self):
-
     self.main_layout = QVBoxLayout()
-    welcome = QLabel('Branch and bound algorithm')
+    welcome = QLabel('Branch and bound')
     welcome.setStyleSheet(
         "QLabel"
         "{"
@@ -60,14 +54,14 @@ def branchTab(self):
         "}"
     )
 
-    upload_csv = upload_button('Upload csv file', self)
-    upload_csv.setFixedWidth(120)
-    upload_csv.setFixedHeight(80)
+    input_file = upload_button('Upload col file', self)
+    input_file.setFixedWidth(120)
+    input_file.setFixedHeight(80)
 
-    upload_csv.clicked.connect(lambda: uploadFile(self))
+    input_file.clicked.connect(lambda: uploadFile(self))
 
     container.addWidget(maxWeight)
-    container.addWidget(upload_csv)
+    container.addWidget(input_file)
 
     upload = QWidget()
     upload.setLayout(container)
@@ -85,7 +79,7 @@ def branchTab(self):
     calcualte = calculte_button('Calculate', self)
 
     calcualte.clicked.connect(lambda: run(
-        self, float(maxWeight.text())))
+        self))
 
     calcualte.setFixedWidth(300)
     calcualte.setFixedHeight(80)
@@ -100,12 +94,12 @@ def branchTab(self):
 
 def uploadFile(self):
     fname, _ = QFileDialog.getOpenFileName(
-        self, "Import CSV", "", "CSV data files (*.csv)")
+        self, "Import Col", "", "Col input files (*.*)")
     self.fname = fname
 
 
 def showResult(self, data):
-    self.table = table_view(data, 4, 4)
+    self.table = table_view(data, 2, 2)
     self.table.verticalHeader().setVisible(False)
     self.table.setStyleSheet(
         "QTableView"
@@ -117,11 +111,7 @@ def showResult(self, data):
     header = self.table.horizontalHeader()
     header.setMaximumWidth(760)
     header.setSectionResizeMode(0, QHeaderView.Stretch)
-    header.setSectionResizeMode(1, QHeaderView.Stretch)
-    header.setSectionResizeMode(2, QHeaderView.Stretch)
-    header.setSectionResizeMode(3, QHeaderView.Stretch)
 
     self.table.setFixedWidth(1200)
-
 
     self.main_layout.addWidget(self.table)
