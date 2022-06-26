@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>180</y>
+      <y>130</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -41,7 +41,7 @@ color: rgb(230, 236, 235);</string>
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>240</y>
+      <y>190</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -64,7 +64,7 @@ color: rgb(230, 236, 235);</string>
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>300</y>
+      <y>250</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -87,7 +87,7 @@ color: rgb(230, 236, 235);</string>
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>360</y>
+      <y>310</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -110,7 +110,7 @@ color: rgb(230, 236, 235);</string>
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>420</y>
+      <y>370</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -126,15 +126,15 @@ color: rgb(230, 236, 235);</string>
 color: rgb(230, 236, 235);</string>
     </property>
     <property name="text">
-     <string>TABU SEARCH</string>
+     <string>Tabu Search</string>
     </property>
    </widget>
    <widget class="QLabel" name="screenTitle">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>40</y>
-      <width>431</width>
+      <x>120</x>
+      <y>30</y>
+      <width>541</width>
       <height>71</height>
      </rect>
     </property>
@@ -158,6 +158,29 @@ color: rgb(24, 53, 75);
      <string>Choose the algorithm</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="greywolfButton">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>430</y>
+      <width>241</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(24, 53, 76);
+color: rgb(230, 236, 235);</string>
+    </property>
+    <property name="text">
+     <string>Grey Wolf</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -165,7 +188,7 @@ color: rgb(24, 53, 75);
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
