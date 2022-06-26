@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QFileDialog
 from core.heuristics.RLF import measure_rlf
 from core.graph import graph
 
+
 class Ui_rlfScreen(object):
     def setupUi(self, rlfScreen):
         rlfScreen.setObjectName("rlfScreen")
@@ -28,9 +29,9 @@ class Ui_rlfScreen(object):
         font.setWeight(75)
         self.screenTitle_2.setFont(font)
         self.screenTitle_2.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.screenTitle_2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.screenTitle_2.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.screenTitle_2.setObjectName("screenTitle_2")
         self.submitButton = QtWidgets.QPushButton(self.centralwidget)
         self.submitButton.setGeometry(QtCore.QRect(140, 240, 171, 31))
@@ -38,8 +39,9 @@ class Ui_rlfScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.submitButton.setFont(font)
-        self.submitButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.submitButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.submitButton.setObjectName("submitButton")
         self.browseCsvButton = QtWidgets.QPushButton(self.centralwidget)
         self.browseCsvButton.setGeometry(QtCore.QRect(490, 180, 171, 31))
@@ -47,8 +49,9 @@ class Ui_rlfScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.browseCsvButton.setFont(font)
-        self.browseCsvButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.browseCsvButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.browseCsvButton.setObjectName("browseCsvButton")
         self.filename = QtWidgets.QLineEdit(self.centralwidget)
         self.filename.setGeometry(QtCore.QRect(140, 180, 341, 31))
@@ -68,7 +71,7 @@ class Ui_rlfScreen(object):
         self.result2.setFont(font)
         self.result2.setObjectName("result2")
         self.resultLabel2 = QtWidgets.QLabel(self.centralwidget)
-        self.resultLabel2.setGeometry(QtCore.QRect(140, 370,200 , 21))
+        self.resultLabel2.setGeometry(QtCore.QRect(140, 370, 200, 21))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -87,8 +90,9 @@ class Ui_rlfScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.returnButton.setFont(font)
-        self.returnButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.returnButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.returnButton.setObjectName("returnButton")
         self.refrechButton = QtWidgets.QPushButton(self.centralwidget)
         self.refrechButton.setGeometry(QtCore.QRect(490, 440, 171, 31))
@@ -96,8 +100,9 @@ class Ui_rlfScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.refrechButton.setFont(font)
-        self.refrechButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.refrechButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.refrechButton.setObjectName("refrechButton")
         rlfScreen.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(rlfScreen)
@@ -128,27 +133,29 @@ class Ui_rlfScreen(object):
         self.refrechButton.setText(_translate("rlfScreen", "Refresh"))
 
     def browseClicked(self):
-        print('browse clicked')
-        fname  = QFileDialog.getOpenFileName(None,"Open File","")
+        print("browse clicked")
+        fname = QFileDialog.getOpenFileName(None, "Open File", "")
         if fname:
-                self.filename.setText(str(fname[0]))
+            self.filename.setText(str(fname[0]))
 
     def submitClicked(self):
-        print('submit clicked')
+        print("submit clicked")
         g = graph()
         g.read(self.filename.text())
         result = measure_rlf(g)
         self.result1.setText(str(result[0]))
         self.result2.setText("{:.9}s".format(result[1]))
         g.visualize_graph()
-        
+
     def refreshClicked(self):
         self.filename.setText("")
         self.result1.setText("-")
         self.result2.setText("-")
-              
+
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     rlfScreen = QtWidgets.QMainWindow()
     ui = Ui_rlfScreen()

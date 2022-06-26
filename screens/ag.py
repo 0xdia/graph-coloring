@@ -11,8 +11,11 @@
 from functools import partial
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
-from core.meta_heuristics.genetic_algorithm.genetic_algorithm import measure_genetic_algorithm
+from core.meta_heuristics.genetic_algorithm.genetic_algorithm import (
+    measure_genetic_algorithm,
+)
 from core.graph import graph
+
 
 class Ui_agScreen(object):
     def setupUi(self, agScreen):
@@ -33,8 +36,9 @@ class Ui_agScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.browseCsvButton.setFont(font)
-        self.browseCsvButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.browseCsvButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.browseCsvButton.setObjectName("browseCsvButton")
         self.poolsizeLabel = QtWidgets.QLabel(self.centralwidget)
         self.poolsizeLabel.setGeometry(QtCore.QRect(100, 180, 151, 31))
@@ -45,9 +49,9 @@ class Ui_agScreen(object):
         font.setWeight(50)
         self.poolsizeLabel.setFont(font)
         self.poolsizeLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.poolsizeLabel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.poolsizeLabel.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.poolsizeLabel.setObjectName("poolsizeLabel")
         self.iterationsLabel = QtWidgets.QLabel(self.centralwidget)
         self.iterationsLabel.setGeometry(QtCore.QRect(430, 180, 131, 31))
@@ -58,9 +62,9 @@ class Ui_agScreen(object):
         font.setWeight(50)
         self.iterationsLabel.setFont(font)
         self.iterationsLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.iterationsLabel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.iterationsLabel.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.iterationsLabel.setObjectName("iterationsLabel")
         self.returnButton = QtWidgets.QPushButton(self.centralwidget)
         self.returnButton.setGeometry(QtCore.QRect(150, 500, 171, 31))
@@ -68,8 +72,9 @@ class Ui_agScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.returnButton.setFont(font)
-        self.returnButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.returnButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.returnButton.setObjectName("returnButton")
         self.resultLabel2 = QtWidgets.QLabel(self.centralwidget)
         self.resultLabel2.setGeometry(QtCore.QRect(160, 440, 181, 21))
@@ -91,8 +96,9 @@ class Ui_agScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.submitButton.setFont(font)
-        self.submitButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.submitButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.submitButton.setObjectName("submitButton")
         self.screenTitle = QtWidgets.QLabel(self.centralwidget)
         self.screenTitle.setGeometry(QtCore.QRect(170, 20, 441, 71))
@@ -103,9 +109,9 @@ class Ui_agScreen(object):
         font.setWeight(75)
         self.screenTitle.setFont(font)
         self.screenTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.screenTitle.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.screenTitle.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.screenTitle.setObjectName("screenTitle")
         self.iterationsInput = QtWidgets.QSpinBox(self.centralwidget)
         self.iterationsInput.setGeometry(QtCore.QRect(590, 180, 121, 31))
@@ -125,8 +131,9 @@ class Ui_agScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.refrechButton.setFont(font)
-        self.refrechButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.refrechButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.refrechButton.setObjectName("refrechButton")
         self.result2 = QtWidgets.QLabel(self.centralwidget)
         self.result2.setGeometry(QtCore.QRect(360, 440, 151, 21))
@@ -152,9 +159,9 @@ class Ui_agScreen(object):
         font.setWeight(50)
         self.crossprobaLabel.setFont(font)
         self.crossprobaLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.crossprobaLabel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.crossprobaLabel.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.crossprobaLabel.setObjectName("crossprobaLabel")
         self.crossprobaInput = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.crossprobaInput.setGeometry(QtCore.QRect(180, 310, 71, 31))
@@ -174,9 +181,9 @@ class Ui_agScreen(object):
         font.setWeight(50)
         self.mutationprobaLabel.setFont(font)
         self.mutationprobaLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.mutationprobaLabel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.mutationprobaLabel.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.mutationprobaLabel.setObjectName("mutationprobaLabel")
         self.mutationprobaInput = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.mutationprobaInput.setGeometry(QtCore.QRect(440, 310, 71, 31))
@@ -189,9 +196,7 @@ class Ui_agScreen(object):
         self.mutationprobaInput.setObjectName("mutationprobaInput")
         self.selectionperLabel = QtWidgets.QLabel(self.centralwidget)
         self.selectionperLabel.setGeometry(QtCore.QRect(540, 310, 151, 31))
-        
-        
-        
+
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -199,9 +204,9 @@ class Ui_agScreen(object):
         font.setWeight(50)
         self.selectionperLabel.setFont(font)
         self.selectionperLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.selectionperLabel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.selectionperLabel.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.selectionperLabel.setObjectName("selectionperLabel")
         self.selectionperInput = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.selectionperInput.setGeometry(QtCore.QRect(700, 310, 71, 31))
@@ -221,9 +226,9 @@ class Ui_agScreen(object):
         font.setWeight(50)
         self.crossingmanerLabel.setFont(font)
         self.crossingmanerLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.crossingmanerLabel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.crossingmanerLabel.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.crossingmanerLabel.setObjectName("crossingmanerLabel")
         self.selectionstrLabel = QtWidgets.QLabel(self.centralwidget)
         self.selectionstrLabel.setGeometry(QtCore.QRect(430, 230, 161, 31))
@@ -234,9 +239,9 @@ class Ui_agScreen(object):
         font.setWeight(50)
         self.selectionstrLabel.setFont(font)
         self.selectionstrLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.selectionstrLabel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.selectionstrLabel.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.selectionstrLabel.setObjectName("selectionstrLabel")
         self.selectionstrInput = QtWidgets.QComboBox(self.centralwidget)
         self.selectionstrInput.addItem("roulette")
@@ -283,7 +288,7 @@ class Ui_agScreen(object):
         QtCore.QMetaObject.connectSlotsByName(agScreen)
         self.submitButton.clicked.connect(partial(self.submitClicked))
         self.browseCsvButton.clicked.connect(partial(self.browseClicked))
-        
+
     def retranslateUi(self, agScreen):
         _translate = QtCore.QCoreApplication.translate
         agScreen.setWindowTitle(_translate("agScreen", "MainWindow"))
@@ -307,32 +312,43 @@ class Ui_agScreen(object):
         self.kButton.setText(_translate("agScreen", "K"))
 
     def browseClicked(self):
-        print('browse clicked')
-        fname  = QFileDialog.getOpenFileName(None,"Open File","")
+        print("browse clicked")
+        fname = QFileDialog.getOpenFileName(None, "Open File", "")
         if fname:
-                self.filename.setText(str(fname[0]))
+            self.filename.setText(str(fname[0]))
 
     def submitClicked(self):
-        print('submit clicked')
+        print("submit clicked")
         poolsize = self.poolsizeInput.value()
         iterations = self.iterationsInput.value()
-        selectionStrategy  = self.selectionstrInput.currentText()
+        selectionStrategy = self.selectionstrInput.currentText()
         crossProba = self.crossprobaInput.value()
         mutationProba = self.mutationprobaInput.value()
         selectionPercentage = self.selectionperInput.value()
         crossingManer = "uniform"
-        if(self.kButton.isChecked()):
-                crossingManer = str(self.knumberInput.value())
-        
+        if self.kButton.isChecked():
+            crossingManer = str(self.knumberInput.value())
+
         g = graph()
-        g.read(self.filename.text()) 
-        result = measure_genetic_algorithm(g,poolsize,selectionStrategy,selectionPercentage,crossProba,crossingManer,mutationProba,iterations)
+        g.read(self.filename.text())
+        result = measure_genetic_algorithm(
+            g,
+            poolsize,
+            selectionStrategy,
+            selectionPercentage,
+            crossProba,
+            crossingManer,
+            mutationProba,
+            iterations,
+        )
         self.result1.setText(str(result[0]))
         self.result2.setText("{:.9}s".format(result[1]))
         g.visualize_graph()
-                
+
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     agScreen = QtWidgets.QMainWindow()
     ui = Ui_agScreen()

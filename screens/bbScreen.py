@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import QFileDialog
 from core.graph import graph
 from core.exact_methods.branch_and_bound import measured_branch_and_bound
 
+
 class Ui_bbScreen(object):
     def setupUi(self, bbScreen):
         bbScreen.setObjectName("bbScreen")
@@ -28,8 +29,9 @@ class Ui_bbScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.browseCsvButton.setFont(font)
-        self.browseCsvButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.browseCsvButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.browseCsvButton.setObjectName("browseCsvButton")
         self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox.setGeometry(QtCore.QRect(130, 200, 241, 17))
@@ -45,8 +47,9 @@ class Ui_bbScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.submitButton.setFont(font)
-        self.submitButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.submitButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.submitButton.setObjectName("submitButton")
         self.checkBox_2 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_2.setGeometry(QtCore.QRect(130, 240, 241, 17))
@@ -64,8 +67,9 @@ class Ui_bbScreen(object):
         font.setBold(True)
         font.setWeight(75)
         self.screenTitle.setFont(font)
-        self.screenTitle.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);")
+        self.screenTitle.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);"
+        )
         self.screenTitle.setObjectName("screenTitle")
         self.resultLabel1 = QtWidgets.QLabel(self.centralwidget)
         self.resultLabel1.setGeometry(QtCore.QRect(130, 350, 200, 21))
@@ -101,8 +105,9 @@ class Ui_bbScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.returnButton.setFont(font)
-        self.returnButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.returnButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.returnButton.setObjectName("returnButton")
         self.refrechButton = QtWidgets.QPushButton(self.centralwidget)
         self.refrechButton.setGeometry(QtCore.QRect(480, 490, 171, 31))
@@ -110,8 +115,9 @@ class Ui_bbScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.refrechButton.setFont(font)
-        self.refrechButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.refrechButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.refrechButton.setObjectName("refrechButton")
         bbScreen.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(bbScreen)
@@ -144,37 +150,38 @@ class Ui_bbScreen(object):
         self.refrechButton.setText(_translate("bbScreen", "Refresh"))
 
     def browseClicked(self):
-        print('browse clicked')
-        fname  = QFileDialog.getOpenFileName(None,"Open File","")
+        print("browse clicked")
+        fname = QFileDialog.getOpenFileName(None, "Open File", "")
         if fname:
-                self.filename.setText(str(fname[0]))
+            self.filename.setText(str(fname[0]))
 
     def submitClicked(self):
-        print('submit clicked')
+        print("submit clicked")
         g = graph()
         recursive = False
         onFirst = False
         g.read(self.filename.text())
-        if(self.checkBox.isChecked()):
+        if self.checkBox.isChecked():
             onFirst = True
-        if(self.checkBox_2.isChecked()):
-            recursive=True
-        
-        result = measured_branch_and_bound(g,onFirst,recursive)
+        if self.checkBox_2.isChecked():
+            recursive = True
+
+        result = measured_branch_and_bound(g, onFirst, recursive)
         self.result1.setText(str(result[0]))
         self.result2.setText("{:.9}s".format(result[1]))
         g.visualize_graph()
 
-        
     def refreshClicked(self):
         self.filename.setText("")
         self.checkBox.setChecked(False)
         self.checkBox_2.setChecked(False)
         self.result1.setText("-")
         self.result2.setText("-")
-        
+
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     bbScreen = QtWidgets.QMainWindow()
     ui = Ui_bbScreen()

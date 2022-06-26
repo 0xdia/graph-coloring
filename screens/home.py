@@ -27,8 +27,9 @@ class Ui_MainWindow(object):
         font.setFamily("Verdana")
         font.setPointSize(14)
         self.benchmarkButton.setFont(font)
-        self.benchmarkButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.benchmarkButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.benchmarkButton.setObjectName("benchmarkButton")
         self.exitButton = QtWidgets.QPushButton(self.centralwidget)
         self.exitButton.setGeometry(QtCore.QRect(280, 390, 241, 41))
@@ -36,8 +37,9 @@ class Ui_MainWindow(object):
         font.setFamily("Verdana")
         font.setPointSize(14)
         self.exitButton.setFont(font)
-        self.exitButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.exitButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.exitButton.setObjectName("exitButton")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(120, 10, 600, 161))
@@ -47,8 +49,9 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.label.setFont(font)
-        self.label.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);")
+        self.label.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);"
+        )
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(340, 500, 131, 31))
@@ -66,8 +69,9 @@ class Ui_MainWindow(object):
         font.setFamily("Verdana")
         font.setPointSize(14)
         self.membersButton.setFont(font)
-        self.membersButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.membersButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.membersButton.setObjectName("membersButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -80,8 +84,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.benchmarkButton.clicked.connect(partial(self.gotoBenchmark,MainWindow))
-        self.exitButton.clicked.connect(partial(self.exitApp,MainWindow))
+        self.benchmarkButton.clicked.connect(partial(self.gotoBenchmark, MainWindow))
+        self.exitButton.clicked.connect(partial(self.exitApp, MainWindow))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -92,15 +96,17 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "By Team 4"))
         self.membersButton.setText(_translate("MainWindow", "Team Members"))
 
-    def gotoBenchmark(self,screen):
+    def gotoBenchmark(self, screen):
         ui = Ui_benchmarkScreen()
         ui.setupUi(screen)
-        
-    def exitApp(self,screen):
-       screen.close()
-        
+
+    def exitApp(self, screen):
+        screen.close()
+
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

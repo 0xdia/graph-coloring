@@ -40,9 +40,9 @@ class Ui_greywolfScreen(object):
         font.setWeight(50)
         self.packsizeLabel.setFont(font)
         self.packsizeLabel.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.packsizeLabel.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.packsizeLabel.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.packsizeLabel.setObjectName("packsizeLabel")
         self.packsizeInput = QtWidgets.QSpinBox(self.centralwidget)
         self.packsizeInput.setGeometry(QtCore.QRect(570, 220, 121, 31))
@@ -58,8 +58,9 @@ class Ui_greywolfScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.submitButton.setFont(font)
-        self.submitButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.submitButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.submitButton.setObjectName("submitButton")
         self.resultLabel1 = QtWidgets.QLabel(self.centralwidget)
         self.resultLabel1.setGeometry(QtCore.QRect(140, 360, 191, 21))
@@ -77,9 +78,9 @@ class Ui_greywolfScreen(object):
         font.setWeight(75)
         self.screenTitle.setFont(font)
         self.screenTitle.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.screenTitle.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.screenTitle.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.screenTitle.setObjectName("screenTitle")
         self.resultLabel2 = QtWidgets.QLabel(self.centralwidget)
         self.resultLabel2.setGeometry(QtCore.QRect(140, 420, 181, 21))
@@ -98,8 +99,9 @@ class Ui_greywolfScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.returnButton.setFont(font)
-        self.returnButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.returnButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.returnButton.setObjectName("returnButton")
         self.browseCsvButton = QtWidgets.QPushButton(self.centralwidget)
         self.browseCsvButton.setGeometry(QtCore.QRect(490, 160, 171, 31))
@@ -107,8 +109,9 @@ class Ui_greywolfScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.browseCsvButton.setFont(font)
-        self.browseCsvButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.browseCsvButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.browseCsvButton.setObjectName("browseCsvButton")
         self.iteartionsInput = QtWidgets.QSpinBox(self.centralwidget)
         self.iteartionsInput.setGeometry(QtCore.QRect(280, 220, 121, 31))
@@ -124,8 +127,9 @@ class Ui_greywolfScreen(object):
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.refrechButton.setFont(font)
-        self.refrechButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
-"color: rgb(230, 236, 235);")
+        self.refrechButton.setStyleSheet(
+            "background-color: rgb(24, 53, 76);\n" "color: rgb(230, 236, 235);"
+        )
         self.refrechButton.setObjectName("refrechButton")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(140, 220, 131, 31))
@@ -136,9 +140,9 @@ class Ui_greywolfScreen(object):
         font.setWeight(50)
         self.label_3.setFont(font)
         self.label_3.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_3.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"color: rgb(24, 53, 75);\n"
-"")
+        self.label_3.setStyleSheet(
+            "background-color: rgb(255, 255, 255);\n" "color: rgb(24, 53, 75);\n" ""
+        )
         self.label_3.setObjectName("label_3")
         greywolfScreen.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(greywolfScreen)
@@ -170,6 +174,7 @@ class Ui_greywolfScreen(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     greywolfScreen = QtWidgets.QMainWindow()
     ui = Ui_greywolfScreen()

@@ -1,6 +1,5 @@
-import sys
 from PyQt5 import QtWidgets
-
+import sys
 from screens.home import Ui_MainWindow
 
 if __name__ == "__main__":
@@ -12,4 +11,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
