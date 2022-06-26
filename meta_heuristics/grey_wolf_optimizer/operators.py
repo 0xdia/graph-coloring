@@ -1,7 +1,7 @@
 from cmath import inf
 import time
-from random import shuffle, seed
-import numpy as np
+from random import randint, shuffle, seed
+from math import floor
 
 seed(time.time())
 
@@ -19,10 +19,26 @@ def get_best_fitting(wolves):
     return wolves.index(min(wolves))
 
 
+def improve_alpha(g, A, alpha_wolf):
+    A = abs(A)
+    for i in range(len(alpha_wolf[1])):
+        rand_color = None
+        if A > 1:
+            rand_color = randint(g.num_vertices, floor(A * g.num_vertices))
+        else:
+            rand_color = randint(0, floor(A * g.num_vertices))
+        candidate = alpha_wolf[1].copy()
+        candidate[i] = rand_color
+        if g.validate_candidate_solution(candidate):
+            alpha_wolf[1][i] = rand_color
+    return (len(set(alpha_wolf[1])), alpha_wolf[1])
+
+
 def wolf_gain_experience(g, follower, *leaders):
     follower_colors = follower[1]
     leaders_colors = [leader[1] for leader in leaders]
     # treat alpha alone
+
     leaders_impact = [(2 + i, leaders_colors[i]) for i in range(len(leaders))] + [
         (1, follower_colors)
     ]
