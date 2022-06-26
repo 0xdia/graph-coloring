@@ -11,16 +11,16 @@ def GWO(g, max_iter, pack_size):
     a, A = 2, 0
 
     for iter in range(max_iter):
-        print(f"[+] Iter {iter}")
+        # print(f"[+] Iter {iter}")
         A = 2 * a * random() - a
-        print("A = ", A)
+        # print("A = ", A)
         wolves[alpha] = improve_alpha(g, A, wolves[alpha])
         wolves[beta] = wolf_gain_experience(g, wolves[beta], wolves[alpha])
         wolves[delta] = wolf_gain_experience(
             g, wolves[delta], wolves[beta], wolves[alpha]
         )
 
-        print(f"{alpha}, {beta}, {delta}")
+        # print(f"{alpha}, {beta}, {delta}")
 
         for wolf in range(pack_size):
             if wolf in [alpha, beta, delta]:
@@ -39,13 +39,13 @@ def GWO(g, max_iter, pack_size):
             else:
                 alpha = best_fitting
             g.update_solution(wolves[alpha][1])
-            print("alpha updated")
+            # print("alpha updated")
         elif wolves[best_fitting][0] < wolves[beta][0]:
             beta = best_fitting
-            print("beta updated")
+            # print("beta updated")
         elif wolves[best_fitting][0] < wolves[delta][0]:
             delta = best_fitting
-            print("delta updated")
+            # print("delta updated")
 
         a = 2 * (1 - iter / max_iter)
 
