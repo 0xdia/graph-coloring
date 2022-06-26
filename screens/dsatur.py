@@ -9,6 +9,8 @@
 
 
 
+
+from functools import partial
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from core.heuristics.d_satur import measure_d_satur
@@ -82,6 +84,24 @@ class Ui_dsaturScreen(object):
         font.setPointSize(12)
         self.result2.setFont(font)
         self.result2.setObjectName("result2")
+        self.returnButton = QtWidgets.QPushButton(self.centralwidget)
+        self.returnButton.setGeometry(QtCore.QRect(130, 430, 171, 31))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.returnButton.setFont(font)
+        self.returnButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
+"color: rgb(230, 236, 235);")
+        self.returnButton.setObjectName("returnButton")
+        self.refrechButton = QtWidgets.QPushButton(self.centralwidget)
+        self.refrechButton.setGeometry(QtCore.QRect(480, 430, 171, 31))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.refrechButton.setFont(font)
+        self.refrechButton.setStyleSheet("background-color: rgb(24, 53, 76);\n"
+"color: rgb(230, 236, 235);")
+        self.refrechButton.setObjectName("refrechButton")
         dsaturScreen.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(dsaturScreen)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -93,6 +113,9 @@ class Ui_dsaturScreen(object):
 
         self.retranslateUi(dsaturScreen)
         QtCore.QMetaObject.connectSlotsByName(dsaturScreen)
+        self.browseCsvButton.clicked.connect(partial(self.browseClicked))
+        self.submitButton.clicked.connect(partial(self.submitClicked))
+        self.refrechButton.clicked.connect(partial(self.refreshClicked))
 
     def retranslateUi(self, dsaturScreen):
         _translate = QtCore.QCoreApplication.translate
@@ -104,8 +127,8 @@ class Ui_dsaturScreen(object):
         self.resultLabel2.setText(_translate("dsaturScreen", "Execution Time"))
         self.result1.setText(_translate("dsaturScreen", "0"))
         self.result2.setText(_translate("dsaturScreen", "0"))
-        self.browseCsvButton.clicked.connect(self.browseClicked)
-        self.submitButton.clicked.connect(self.submitClicked)
+        self.returnButton.setText(_translate("dsaturScreen", "Return"))
+        self.refrechButton.setText(_translate("dsaturScreen", "Refresh"))
 
     def browseClicked(self):
         print('browse clicked')
@@ -113,14 +136,18 @@ class Ui_dsaturScreen(object):
         if fname:
                 self.filename.setText(str(fname[0]))
 
-    def submitClicked(self):
-        print('submit clicked')
+    def submitClicked(self,param):
+        print(param+" clicked")
         g = graph()
         g.read(self.filename.text())
         result = measure_d_satur(g)
         self.result1.setText(str(result[0]))
         self.result2.setText("{:.9}s".format(result[1]))
         
+    def refreshClicked(self):
+        self.filename.setText("")
+        self.result1.setText("-")
+        self.result2.setText("-")             
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

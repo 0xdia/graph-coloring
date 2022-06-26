@@ -47,7 +47,7 @@ color: rgb(230, 236, 235);</string>
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>310</y>
+      <y>390</y>
       <width>241</width>
       <height>41</height>
      </rect>
@@ -113,6 +113,29 @@ color: rgb(24, 53, 75);</string>
     </property>
     <property name="text">
      <string>By Team 4</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="membersButton">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>290</y>
+      <width>241</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(24, 53, 76);
+color: rgb(230, 236, 235);</string>
+    </property>
+    <property name="text">
+     <string>Team Members</string>
     </property>
    </widget>
   </widget>
