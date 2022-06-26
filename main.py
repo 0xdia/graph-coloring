@@ -9,10 +9,8 @@ from screens.home import Ui_MainWindow
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    list=[]
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
-    list.append(ui)
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
