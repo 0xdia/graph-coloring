@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './ui_files/rlf.ui'
+# Form implementation generated from reading ui file 'rlf.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -9,9 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QFileDialog
 from core.heuristics.RLF import measure_rlf
 from core.graph import graph
+
+
 
 class Ui_rlfScreen(object):
     def setupUi(self, rlfScreen):
@@ -53,6 +55,34 @@ class Ui_rlfScreen(object):
         self.filename = QtWidgets.QLineEdit(self.centralwidget)
         self.filename.setGeometry(QtCore.QRect(140, 180, 341, 31))
         self.filename.setObjectName("filename")
+        self.resultLabel1 = QtWidgets.QLabel(self.centralwidget)
+        self.resultLabel1.setGeometry(QtCore.QRect(140, 310, 151, 21))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.resultLabel1.setFont(font)
+        self.resultLabel1.setObjectName("resultLabel1")
+        self.result2 = QtWidgets.QLabel(self.centralwidget)
+        self.result2.setGeometry(QtCore.QRect(310, 370, 151, 21))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.result2.setFont(font)
+        self.result2.setObjectName("result2")
+        self.resultLabel2 = QtWidgets.QLabel(self.centralwidget)
+        self.resultLabel2.setGeometry(QtCore.QRect(140, 370, 151, 21))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.resultLabel2.setFont(font)
+        self.resultLabel2.setObjectName("resultLabel2")
+        self.result1 = QtWidgets.QLabel(self.centralwidget)
+        self.result1.setGeometry(QtCore.QRect(310, 310, 151, 21))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.result1.setFont(font)
+        self.result1.setObjectName("result1")
         rlfScreen.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(rlfScreen)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -66,13 +96,18 @@ class Ui_rlfScreen(object):
         QtCore.QMetaObject.connectSlotsByName(rlfScreen)
         self.browseCsvButton.clicked.connect(self.browseClicked)
         self.submitButton.clicked.connect(self.submitClicked)
-
+        
+        
     def retranslateUi(self, rlfScreen):
         _translate = QtCore.QCoreApplication.translate
         rlfScreen.setWindowTitle(_translate("rlfScreen", "MainWindow"))
         self.screenTitle_2.setText(_translate("rlfScreen", "RLF"))
         self.submitButton.setText(_translate("rlfScreen", "Show result"))
         self.browseCsvButton.setText(_translate("rlfScreen", "Browse CSV file"))
+        self.resultLabel1.setText(_translate("rlfScreen", "Number Of Colors"))
+        self.result2.setText(_translate("rlfScreen", "0"))
+        self.resultLabel2.setText(_translate("rlfScreen", "Execution Time"))
+        self.result1.setText(_translate("rlfScreen", "0"))
 
     def browseClicked(self):
         print('browse clicked')
@@ -84,9 +119,10 @@ class Ui_rlfScreen(object):
         print('submit clicked')
         g = graph()
         g.read(self.filename.text())
-        measure_rlf(g)
-        
-        
+        result = measure_rlf(g)
+        self.result1.setText(str(result[0]))
+        self.result2.setText("{:.9}s".format(result[1]))
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

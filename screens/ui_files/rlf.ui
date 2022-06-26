@@ -43,7 +43,7 @@ color: rgb(24, 53, 75);
      <string>RLF</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="browseCsvButton_4">
+   <widget class="QPushButton" name="submitButton">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -66,7 +66,7 @@ color: rgb(230, 236, 235);</string>
      <string>Show result</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="browseCsvButton_3">
+   <widget class="QPushButton" name="browseCsvButton">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -89,7 +89,7 @@ color: rgb(230, 236, 235);</string>
      <string>Browse CSV file</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="filename_2">
+   <widget class="QLineEdit" name="filename">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -97,6 +97,82 @@ color: rgb(230, 236, 235);</string>
       <width>341</width>
       <height>31</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="resultLabel1">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>310</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Number Of Colors</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="result2">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>370</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="resultLabel2">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>370</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Execution Time</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="result1">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>310</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Verdana</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>0</string>
     </property>
    </widget>
   </widget>

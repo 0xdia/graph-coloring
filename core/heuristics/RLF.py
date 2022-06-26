@@ -55,3 +55,4 @@ def measure_rlf(g):
     print("Optimum: ", g.optimum)
     print("Colors: ", g.colors)
     print("Execution time: ", end_time - start_time)
+    return g.optimum ,  end_time - start_time
