@@ -18,7 +18,7 @@ from core.graph import graph
 
 
 class Ui_agScreen(object):
-    def setupUi(self, agScreen):
+    def setupUi(self, agScreen,pile):
         agScreen.setObjectName("agScreen")
         agScreen.resize(860, 600)
         self.centralwidget = QtWidgets.QWidget(agScreen)
@@ -288,6 +288,7 @@ class Ui_agScreen(object):
         QtCore.QMetaObject.connectSlotsByName(agScreen)
         self.submitButton.clicked.connect(partial(self.submitClicked))
         self.browseCsvButton.clicked.connect(partial(self.browseClicked))
+        self.returnButton.clicked.connect(partial(self.returnClicked,agScreen,pile))
 
     def retranslateUi(self, agScreen):
         _translate = QtCore.QCoreApplication.translate
@@ -345,6 +346,11 @@ class Ui_agScreen(object):
         self.result2.setText("{:.9}s".format(result[1]))
         g.visualize_graph()
 
+    def returnClicked(self,screen,pile):
+        print("return ")
+        ui = pile.pop()
+        print(pile)
+        ui.setupUi(screen,pile)    
 
 if __name__ == "__main__":
     import sys

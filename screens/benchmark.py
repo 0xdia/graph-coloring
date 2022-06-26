@@ -20,7 +20,7 @@ from screens.greywolf import Ui_greywolfScreen
 
 
 class Ui_benchmarkScreen(object):
-    def setupUi(self, benchmarkScreen):
+    def setupUi(self, benchmarkScreen,pile):
         benchmarkScreen.setObjectName("benchmarkScreen")
         benchmarkScreen.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(benchmarkScreen)
@@ -109,12 +109,12 @@ class Ui_benchmarkScreen(object):
 
         self.retranslateUi(benchmarkScreen)
         QtCore.QMetaObject.connectSlotsByName(benchmarkScreen)
-        self.dsatButton.clicked.connect(partial(self.gotoDsatur, benchmarkScreen))
-        self.tabuButton.clicked.connect(partial(self.gotoTabu, benchmarkScreen))
-        self.rlfButton.clicked.connect(partial(self.gotoRlf, benchmarkScreen))
-        self.bbButton.clicked.connect(partial(self.gotoBb, benchmarkScreen))
-        self.agButton.clicked.connect(partial(self.gotoAg, benchmarkScreen))
-        self.greywolfButton.clicked.connect(partial(self.gotoGreyWolf, benchmarkScreen))
+        self.dsatButton.clicked.connect(partial(self.gotoDsatur, benchmarkScreen,pile))
+        self.tabuButton.clicked.connect(partial(self.gotoTabu, benchmarkScreen,pile))
+        self.rlfButton.clicked.connect(partial(self.gotoRlf, benchmarkScreen,pile))
+        self.bbButton.clicked.connect(partial(self.gotoBb, benchmarkScreen,pile))
+        self.agButton.clicked.connect(partial(self.gotoAg, benchmarkScreen,pile))
+        self.greywolfButton.clicked.connect(partial(self.gotoGreyWolf, benchmarkScreen,pile))
 
     def retranslateUi(self, benchmarkScreen):
         _translate = QtCore.QCoreApplication.translate
@@ -127,35 +127,43 @@ class Ui_benchmarkScreen(object):
         self.screenTitle.setText(_translate("benchmarkScreen", "Choose the algorithm"))
         self.greywolfButton.setText(_translate("benchmarkScreen", "Grey Wolf"))
 
-    def gotoDsatur(self, screen):
+    def gotoDsatur(self, screen,pile):
         print("Go to dsatur")
+        pile.append(self)
         ui = Ui_dsaturScreen()
-        ui.setupUi(screen)
+        ui.setupUi(screen,pile)
 
-    def gotoAg(self, screen):
+    def gotoAg(self, screen,pile):
         print("Go to AG")
+        pile.append(self)
         ui = Ui_agScreen()
-        ui.setupUi(screen)
+        ui.setupUi(screen,pile)
 
-    def gotoGreyWolf(self, screen):
+    def gotoGreyWolf(self, screen,pile):
         print("Go to Grey wolf")
+        pile.append(self)
         ui = Ui_greywolfScreen()
-        ui.setupUi(screen)
+        ui.setupUi(screen,pile)
 
-    def gotoBb(self, screen):
+    def gotoBb(self, screen,pile):
         print("Go to B&b")
+        #pushScreen(self)
+        pile.append(self)
+        print(pile)
         ui = Ui_bbScreen()
-        ui.setupUi(screen)
+        ui.setupUi(screen,pile)
 
-    def gotoRlf(self, screen):
+    def gotoRlf(self, screen,pile):
         print("Go to B&b")
+        pile.append(self)
         ui = Ui_rlfScreen()
-        ui.setupUi(screen)
+        ui.setupUi(screen,pile)
 
-    def gotoTabu(self, screen):
+    def gotoTabu(self, screen,pile):
         print("Go to Tabu")
+        pile.append(self)
         ui = Ui_tabuScreen()
-        ui.setupUi(screen)
+        ui.setupUi(screen,pile)
 
 
 if __name__ == "__main__":

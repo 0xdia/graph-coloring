@@ -15,7 +15,7 @@ from core.graph import graph
 
 
 class Ui_rlfScreen(object):
-    def setupUi(self, rlfScreen):
+    def setupUi(self, rlfScreen,pile):
         rlfScreen.setObjectName("rlfScreen")
         rlfScreen.resize(800, 605)
         self.centralwidget = QtWidgets.QWidget(rlfScreen)
@@ -118,6 +118,7 @@ class Ui_rlfScreen(object):
         self.browseCsvButton.clicked.connect(partial(self.browseClicked))
         self.submitButton.clicked.connect(partial(self.submitClicked))
         self.refrechButton.clicked.connect(partial(self.refreshClicked))
+        self.returnButton.clicked.connect(partial(self.returnClicked,rlfScreen,pile))
 
     def retranslateUi(self, rlfScreen):
         _translate = QtCore.QCoreApplication.translate
@@ -152,7 +153,12 @@ class Ui_rlfScreen(object):
         self.result1.setText("-")
         self.result2.setText("-")
 
-
+    def returnClicked(self,screen,pile):
+        print("return ")
+        ui = pile.pop()
+        print(pile)
+        ui.setupUi(screen,pile)
+        
 if __name__ == "__main__":
     import sys
 

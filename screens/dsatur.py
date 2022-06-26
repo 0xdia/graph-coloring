@@ -16,7 +16,7 @@ from core.graph import graph
 
 
 class Ui_dsaturScreen(object):
-    def setupUi(self, dsaturScreen):
+    def setupUi(self, dsaturScreen,pile):
         dsaturScreen.setObjectName("dsaturScreen")
         dsaturScreen.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(dsaturScreen)
@@ -119,6 +119,7 @@ class Ui_dsaturScreen(object):
         self.browseCsvButton.clicked.connect(partial(self.browseClicked))
         self.submitButton.clicked.connect(partial(self.submitClicked))
         self.refrechButton.clicked.connect(partial(self.refreshClicked))
+        self.returnButton.clicked.connect(partial(self.returnClicked,dsaturScreen,pile))
 
     def retranslateUi(self, dsaturScreen):
         _translate = QtCore.QCoreApplication.translate
@@ -152,7 +153,12 @@ class Ui_dsaturScreen(object):
         self.result1.setText("-")
         self.result2.setText("-")
 
-
+    def returnClicked(self,screen,pile):
+        print("return ")
+        ui = pile.pop()
+        print(pile)
+        ui.setupUi(screen,pile)
+        
 if __name__ == "__main__":
     import sys
 
