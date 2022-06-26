@@ -7,6 +7,7 @@ seed(time.time())
 
 
 def GWO(g, max_iter, pack_size, a, param_tuning=False):
+    start = time.time()
     wolves = init_pack(g.num_vertices, pack_size)
     alpha, beta, delta = 0, 1, 2
     A = 0
@@ -55,4 +56,7 @@ def GWO(g, max_iter, pack_size, a, param_tuning=False):
         if param_tuning:
             optimum_convergence.append(g.optimum)
 
-    return optimum_convergence
+    end = time.time()
+    print("optimum is : ", g.optimum)
+    print("time is : ", end - start)
+    print("solution is : ", g.colors)

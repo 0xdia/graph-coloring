@@ -6,6 +6,7 @@ import itertools
 import numpy as np
 from ..grey_wolf_optimizer.grey_wolf_optimizer import GWO
 
+
 def max_iter_impact(g, file_name):
     figure, axis = plt.subplots(1, 2)
     axis[0].set_title("Nombres des couleurs optimums")
@@ -19,7 +20,7 @@ def max_iter_impact(g, file_name):
 
     pack_size = 50
     a = 2
-    max_iter_list = [_ for _ in range(250, 501, 250)]
+    max_iter_list = [_ for _ in range(250, 1001, 250)]
     iterations = list(range(max_iter_list[-1]))
 
     times = []
@@ -63,6 +64,7 @@ def max_iter_impact(g, file_name):
     )
     plt.show()
 """
+
 
 def pack_size_impact(g, file_name):
     figure, axis = plt.subplots(1, 2)

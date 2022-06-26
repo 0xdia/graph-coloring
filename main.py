@@ -1,4 +1,6 @@
 import sys
+
+from numpy import False_
 from graph import graph
 from meta_heuristics.grey_wolf_optimizer.grey_wolf_optimizer import GWO
 from meta_heuristics.params_tuning.grey_wolf_params_tuning import (
@@ -21,5 +23,8 @@ if __name__ == "__main__":
     # file_name = input_file.split("\\")[-1].split(".")[0]
     # Colorer le graphe g et mesure le temps que ça prend.
     # choisir une algorithe et l'appeler ici
-    max_iter_impact(g, input_file)
-    g.visualize_graph()
+    # max_iter_impact(g, input_file)
+    # pack_size_impact(g, input_file)
+    # a_param_impact(g, input_file)
+    GWO(g, 500, 50, 2, False)
+    # g.visualize_graph()
