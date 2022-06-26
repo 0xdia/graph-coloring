@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './ui_files/tabu.ui'
+# Form implementation generated from reading ui file 'tabu.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -10,6 +10,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
+from core.meta_heuristics.tabu_search.tabu_search import measure_tabu
+from core.graph import graph
+
+
 
 class Ui_tabuScreen(object):
     def setupUi(self, tabuScreen):
@@ -44,7 +48,7 @@ class Ui_tabuScreen(object):
         self.filename.setText("")
         self.filename.setObjectName("filename")
         self.submitButton = QtWidgets.QPushButton(self.centralwidget)
-        self.submitButton.setGeometry(QtCore.QRect(130, 440, 171, 31))
+        self.submitButton.setGeometry(QtCore.QRect(130, 340, 171, 31))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -66,7 +70,7 @@ class Ui_tabuScreen(object):
 "")
         self.label.setObjectName("label")
         self.colorsInput = QtWidgets.QSpinBox(self.centralwidget)
-        self.colorsInput.setGeometry(QtCore.QRect(280, 250, 121, 31))
+        self.colorsInput.setGeometry(QtCore.QRect(270, 250, 121, 31))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -74,7 +78,7 @@ class Ui_tabuScreen(object):
         self.colorsInput.setMaximum(50000)
         self.colorsInput.setObjectName("colorsInput")
         self.repsInput = QtWidgets.QSpinBox(self.centralwidget)
-        self.repsInput.setGeometry(QtCore.QRect(280, 290, 121, 31))
+        self.repsInput.setGeometry(QtCore.QRect(560, 250, 121, 31))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -82,7 +86,7 @@ class Ui_tabuScreen(object):
         self.repsInput.setMaximum(50000)
         self.repsInput.setObjectName("repsInput")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(130, 290, 131, 31))
+        self.label_2.setGeometry(QtCore.QRect(420, 250, 131, 31))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -95,7 +99,7 @@ class Ui_tabuScreen(object):
 "")
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(130, 330, 131, 31))
+        self.label_3.setGeometry(QtCore.QRect(130, 290, 131, 31))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -108,7 +112,7 @@ class Ui_tabuScreen(object):
 "")
         self.label_3.setObjectName("label_3")
         self.iteartionsInput = QtWidgets.QSpinBox(self.centralwidget)
-        self.iteartionsInput.setGeometry(QtCore.QRect(280, 330, 121, 31))
+        self.iteartionsInput.setGeometry(QtCore.QRect(270, 290, 121, 31))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -116,7 +120,7 @@ class Ui_tabuScreen(object):
         self.iteartionsInput.setMaximum(50000)
         self.iteartionsInput.setObjectName("iteartionsInput")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(130, 370, 131, 31))
+        self.label_4.setGeometry(QtCore.QRect(420, 290, 131, 31))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
@@ -129,13 +133,41 @@ class Ui_tabuScreen(object):
 "")
         self.label_4.setObjectName("label_4")
         self.tabusizeInput = QtWidgets.QSpinBox(self.centralwidget)
-        self.tabusizeInput.setGeometry(QtCore.QRect(280, 370, 121, 31))
+        self.tabusizeInput.setGeometry(QtCore.QRect(560, 290, 121, 31))
         font = QtGui.QFont()
         font.setFamily("Verdana")
         font.setPointSize(12)
         self.tabusizeInput.setFont(font)
         self.tabusizeInput.setMaximum(50000)
         self.tabusizeInput.setObjectName("tabusizeInput")
+        self.resultLabel1 = QtWidgets.QLabel(self.centralwidget)
+        self.resultLabel1.setGeometry(QtCore.QRect(130, 400, 151, 21))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.resultLabel1.setFont(font)
+        self.resultLabel1.setObjectName("resultLabel1")
+        self.result1 = QtWidgets.QLabel(self.centralwidget)
+        self.result1.setGeometry(QtCore.QRect(300, 400, 151, 21))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.result1.setFont(font)
+        self.result1.setObjectName("result1")
+        self.resultLabel2 = QtWidgets.QLabel(self.centralwidget)
+        self.resultLabel2.setGeometry(QtCore.QRect(130, 460, 151, 21))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.resultLabel2.setFont(font)
+        self.resultLabel2.setObjectName("resultLabel2")
+        self.result2 = QtWidgets.QLabel(self.centralwidget)
+        self.result2.setGeometry(QtCore.QRect(300, 460, 151, 21))
+        font = QtGui.QFont()
+        font.setFamily("Verdana")
+        font.setPointSize(12)
+        self.result2.setFont(font)
+        self.result2.setObjectName("result2")
         tabuScreen.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(tabuScreen)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -147,7 +179,6 @@ class Ui_tabuScreen(object):
 
         self.retranslateUi(tabuScreen)
         QtCore.QMetaObject.connectSlotsByName(tabuScreen)
-
         self.browseCsvButton.clicked.connect(self.browseClicked)
         self.submitButton.clicked.connect(self.submitClicked)
         
@@ -162,6 +193,10 @@ class Ui_tabuScreen(object):
         self.label_2.setText(_translate("tabuScreen", "Repetitions"))
         self.label_3.setText(_translate("tabuScreen", "Max iterations"))
         self.label_4.setText(_translate("tabuScreen", "Tabu size"))
+        self.resultLabel1.setText(_translate("tabuScreen", "Number Of Colors"))
+        self.result1.setText(_translate("tabuScreen", "0"))
+        self.resultLabel2.setText(_translate("tabuScreen", "Execution Time"))
+        self.result2.setText(_translate("tabuScreen", "0"))
 
     def browseClicked(self):
         print('browse clicked')
@@ -171,7 +206,17 @@ class Ui_tabuScreen(object):
 
     def submitClicked(self):
         print('submit clicked')
-
+        g = graph()
+        g.read(self.filename.text())
+        param_colors_number = self.colorsInput.value()
+        param_reps = self.repsInput.value()
+        param_max_iterations = self.iteartionsInput.value()
+        param_tabu_size = self.tabusizeInput.value()
+        
+        result = measure_tabu(g,param_colors_number,param_tabu_size,param_reps,param_max_iterations)
+        self.result1.setText(str(result[0]))
+        self.result2.setText("{:.9}s".format(result[1]))
+        
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

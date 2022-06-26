@@ -10,7 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
-
+from core.heuristics.d_satur import measure_d_satur
+from core.graph import graph
 
 class Ui_dsaturScreen(object):
     def setupUi(self, dsaturScreen):
@@ -81,6 +82,9 @@ class Ui_dsaturScreen(object):
 
     def submitClicked(self):
         print('submit clicked')
+        g = graph()
+        g.read(self.filename.text())
+        measure_d_satur(g)
 
 if __name__ == "__main__":
     import sys

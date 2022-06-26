@@ -10,7 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
-
+from core.heuristics.RLF import measure_rlf
+from core.graph import graph
 
 class Ui_rlfScreen(object):
     def setupUi(self, rlfScreen):
@@ -81,6 +82,9 @@ class Ui_rlfScreen(object):
 
     def submitClicked(self):
         print('submit clicked')
+        g = graph()
+        g.read(self.filename.text())
+        measure_rlf(g)
         
         
 if __name__ == "__main__":
