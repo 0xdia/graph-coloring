@@ -6,7 +6,6 @@ import itertools
 import numpy as np
 from ..grey_wolf_optimizer.grey_wolf_optimizer import GWO
 
-
 def max_iter_impact(g, file_name):
     figure, axis = plt.subplots(1, 2)
     axis[0].set_title("Nombres des couleurs optimums")
@@ -20,7 +19,7 @@ def max_iter_impact(g, file_name):
 
     pack_size = 50
     a = 2
-    max_iter_list = [_ for _ in range(250, 1001, 250)]
+    max_iter_list = [_ for _ in range(250, 501, 250)]
     iterations = list(range(max_iter_list[-1]))
 
     times = []
@@ -42,14 +41,14 @@ def max_iter_impact(g, file_name):
 
         # re-init the the graph
         g.re_initialize_graph()
-    with open(
-        "./benchmark/grey_wolf/" + {file_name} + "/max_iter_impact_values.txt", "w+",
+    """with open(
+        "./benchmark/grey_wolf/" + file_name[:-4] + "/max_iter_impact_values.txt", "w+",
     ) as fp:
         fp.write("values, optimum, time\n")
         for (max_iter, optimum, t) in zip(max_iter_list, optimums, times):
             fp.write("%s ,%s, %s\n" % (max_iter, optimum, t))
         fp.close()
-
+"""
     axis[0].set_yticks(range(math.floor(0), math.ceil(max(times))))
     axis[0].set_yticks(range(math.floor(min_optimum), math.ceil(max_optimum)))
     axis[0].set_ylim(bottom=min_optimum - 1, top=max_optimum)
@@ -58,12 +57,12 @@ def max_iter_impact(g, file_name):
     axis[0].legend()
     axis[1].legend()
     plt.show()
-    plt.savefig(
-        "./benchmark/grey_wolf/" + {file_name} + "/max_iter_impact.png",
+    """plt.savefig(
+        "./benchmark/grey_wolf/" + file_name[:-4] + "/max_iter_impact.png",
         bbox_inches="tight",
     )
     plt.show()
-
+"""
 
 def pack_size_impact(g, file_name):
     figure, axis = plt.subplots(1, 2)
@@ -99,12 +98,12 @@ def pack_size_impact(g, file_name):
 
         # re-init the the graph
         g.re_initialize_graph()
-    with open("./benchmark/grey_wolf/" + {file_name} + "/pack_size.txt", "w+",) as fp:
+    """with open("./benchmark/grey_wolf/" + file_name + "/pack_size.txt", "w+",) as fp:
         fp.write("values, optimum, time\n")
         for (max_iter, optimum, t) in zip(pack_size_list, optimums, times):
             fp.write("%s ,%s, %s\n" % (max_iter, optimum, t))
         fp.close()
-
+"""
     axis[0].set_yticks(range(math.floor(0), math.ceil(max(times))))
     axis[0].set_yticks(range(math.floor(min_optimum), math.ceil(max_optimum)))
     axis[0].set_ylim(bottom=min_optimum - 1, top=max_optimum)
@@ -113,11 +112,11 @@ def pack_size_impact(g, file_name):
     axis[0].legend()
     axis[1].legend()
     plt.show()
-    plt.savefig(
-        "./benchmark/grey_wolf/" + {file_name} + "/pack_size_impact.png",
+    """plt.savefig(
+        "./benchmark/grey_wolf/" + file_name + "/pack_size_impact.png",
         bbox_inches="tight",
     )
-    plt.show()
+    plt.show()"""
 
 
 def a_param_impact(g, file_name):
@@ -154,14 +153,14 @@ def a_param_impact(g, file_name):
 
         # re-init the the graph
         g.re_initialize_graph()
-    with open(
+    """with open(
         "./benchmark/grey_wolf/" + {file_name} + "/a_param_impact_values.txt", "w+",
     ) as fp:
         fp.write("values, optimum, time\n")
         for (max_iter, optimum, t) in zip(a_param_list, optimums, times):
             fp.write("%s ,%s, %s\n" % (max_iter, optimum, t))
         fp.close()
-
+"""
     axis[0].set_yticks(range(math.floor(0), math.ceil(max(times))))
     axis[0].set_yticks(range(math.floor(min_optimum), math.ceil(max_optimum)))
     axis[0].set_ylim(bottom=min_optimum - 1, top=max_optimum)
@@ -170,8 +169,9 @@ def a_param_impact(g, file_name):
     axis[0].legend()
     axis[1].legend()
     plt.show()
-    plt.savefig(
+    """plt.savefig(
         "./benchmark/grey_wolf/" + {file_name} + "/a_param_impact.png",
         bbox_inches="tight",
     )
     plt.show()
+"""
