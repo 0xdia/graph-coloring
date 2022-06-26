@@ -6,6 +6,8 @@ seed(time.time())
 
 
 def GWO(g, max_iter, pack_size):
+    g.optimum = g.num_vertices
+    print("g.vertices ", g.num_vertices)
     wolves = init_pack(g.num_vertices, pack_size)
     alpha, beta, delta = 0, 1, 2
     a, A = 2, 0
@@ -48,6 +50,9 @@ def GWO(g, max_iter, pack_size):
             # print("delta updated")
 
         a = 2 * (1 - iter / max_iter)
+
     end_time =time.time()
     g.validate_solution()
+    print("wolves alpha ", wolves[alpha][0])
+    print("g.optimum ", g.optimum)
     return g.optimum , end_time-start_time

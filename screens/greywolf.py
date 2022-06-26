@@ -188,13 +188,14 @@ class Ui_greywolfScreen(object):
     def submitClicked(self):
         print("submit clicked")
         g = graph()
+        g.read(self.filename.text())
         iterations = self.iteartionsInput.value()
         packsize = self.packsizeInput.value()
         print(iterations)
         print(packsize)
 
         result = GWO(g, iterations, packsize)
-        print(result)
+        print("inside screen: ", result)
         self.result1.setText(str(result[0]))
         self.result2.setText("{:.9}s".format(result[1]))
 
