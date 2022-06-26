@@ -16,4 +16,5 @@ if __name__ == "__main__":
     # file_name = input_file.split("\\")[-1].split(".")[0]
     # Colorer le graphe g et mesure le temps que ça prend.
     # choisir une algorithe et l'appeler ici
-    GWO(g, 300, 50)
+    GWO(g, 500, 50)
+    g.visualize_graph()
