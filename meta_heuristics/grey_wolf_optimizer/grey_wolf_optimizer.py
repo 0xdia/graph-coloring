@@ -1,3 +1,4 @@
+from sqlalchemy import false
 from .operators import init_pack, get_best_fitting, wolf_gain_experience, improve_alpha
 import time
 from random import seed, random
@@ -5,10 +6,12 @@ from random import seed, random
 seed(time.time())
 
 
-def GWO(g, max_iter, pack_size):
+def GWO(g, max_iter, pack_size, a, param_tuning=False):
     wolves = init_pack(g.num_vertices, pack_size)
     alpha, beta, delta = 0, 1, 2
-    a, A = 2, 0
+    A = 0
+
+    optimum_convergence = []
 
     for iter in range(max_iter):
         # print(f"[+] Iter {iter}")
@@ -49,6 +52,7 @@ def GWO(g, max_iter, pack_size):
 
         a = 2 * (1 - iter / max_iter)
 
-    g.validate_solution()
-    print("optimum is: ", g.optimum)
-    print("optimums: ", g.colors)
+        if param_tuning:
+            optimum_convergence.append(g.optimum)
+
+    return optimum_convergence
