@@ -16,7 +16,7 @@ from core.graph import graph
 
 
 class Ui_tabuScreen(object):
-    def setupUi(self, tabuScreen,pile):
+    def setupUi(self, tabuScreen, pile):
         tabuScreen.setObjectName("tabuScreen")
         tabuScreen.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(tabuScreen)
@@ -204,7 +204,7 @@ class Ui_tabuScreen(object):
         self.browseCsvButton.clicked.connect(partial(self.browseClicked))
         self.submitButton.clicked.connect(partial(self.submitClicked))
         self.refrechButton.clicked.connect(partial(self.refreshClicked))
-        self.returnButton.clicked.connect(partial(self.returnClicked,tabuScreen,pile))
+        self.returnButton.clicked.connect(partial(self.returnClicked, tabuScreen, pile))
 
     def retranslateUi(self, tabuScreen):
         _translate = QtCore.QCoreApplication.translate
@@ -254,12 +254,13 @@ class Ui_tabuScreen(object):
         self.result1.setText("-")
         self.result2.setText("-")
 
-    def returnClicked(self,screen,pile):
+    def returnClicked(self, screen, pile):
         print("return ")
         ui = pile.pop()
         print(pile)
-        ui.setupUi(screen,pile)
-        
+        ui.setupUi(screen, pile)
+
+
 if __name__ == "__main__":
     import sys
 

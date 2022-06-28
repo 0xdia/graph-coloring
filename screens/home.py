@@ -14,8 +14,8 @@ from screens.benchmark import Ui_benchmarkScreen
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow,pile):
-        
+    def setupUi(self, MainWindow, pile):
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 611)
         MainWindow.setAutoFillBackground(False)
@@ -85,7 +85,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.benchmarkButton.clicked.connect(partial(self.gotoBenchmark, MainWindow,pile))
+        self.benchmarkButton.clicked.connect(
+            partial(self.gotoBenchmark, MainWindow, pile)
+        )
         self.exitButton.clicked.connect(partial(self.exitApp, MainWindow))
 
     def retranslateUi(self, MainWindow):
@@ -97,11 +99,11 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "By Team 4"))
         self.membersButton.setText(_translate("MainWindow", "Team Members"))
 
-    def gotoBenchmark(self, screen,pile):
+    def gotoBenchmark(self, screen, pile):
         pile.append(self)
         print(pile)
         ui = Ui_benchmarkScreen()
-        ui.setupUi(screen,pile)
+        ui.setupUi(screen, pile)
 
     def exitApp(self, screen):
         screen.close()

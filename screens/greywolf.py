@@ -13,8 +13,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from core.meta_heuristics.grey_wolf_optimizer.grey_wolf_optimizer import GWO
 from core.graph import graph
+
+
 class Ui_greywolfScreen(object):
-    def setupUi(self, greywolfScreen,pile):
+    def setupUi(self, greywolfScreen, pile):
         greywolfScreen.setObjectName("greywolfScreen")
         greywolfScreen.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(greywolfScreen)
@@ -160,10 +162,13 @@ class Ui_greywolfScreen(object):
         self.browseCsvButton.clicked.connect(partial(self.browseClicked))
         self.submitButton.clicked.connect(partial(self.submitClicked))
         self.refrechButton.clicked.connect(partial(self.refreshClicked))
-        self.returnButton.clicked.connect(partial(self.returnClicked,greywolfScreen,pile))
-        self.returnButton.clicked.connect(partial(self.returnClicked,greywolfScreen,pile))
+        self.returnButton.clicked.connect(
+            partial(self.returnClicked, greywolfScreen, pile)
+        )
+        self.returnButton.clicked.connect(
+            partial(self.returnClicked, greywolfScreen, pile)
+        )
 
-        
     def retranslateUi(self, greywolfScreen):
         _translate = QtCore.QCoreApplication.translate
         greywolfScreen.setWindowTitle(_translate("greywolfScreen", "MainWindow"))
@@ -201,13 +206,14 @@ class Ui_greywolfScreen(object):
 
     def refreshClicked(self):
         pass
-        
-    def returnClicked(self,screen,pile):
+
+    def returnClicked(self, screen, pile):
         print("return ")
         ui = pile.pop()
         print(pile)
-        ui.setupUi(screen,pile)
-    
+        ui.setupUi(screen, pile)
+
+
 if __name__ == "__main__":
     import sys
 

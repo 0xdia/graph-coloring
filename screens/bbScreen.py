@@ -12,10 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
 from core.graph import graph
 from core.exact_methods.branch_and_bound import measured_branch_and_bound
-#from main import pushScreen,popScreen
+
+# from main import pushScreen,popScreen
+
 
 class Ui_bbScreen(object):
-    def setupUi(self, bbScreen,pile):
+    def setupUi(self, bbScreen, pile):
         bbScreen.setObjectName("bbScreen")
         bbScreen.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(bbScreen)
@@ -133,7 +135,7 @@ class Ui_bbScreen(object):
         self.browseCsvButton.clicked.connect(partial(self.browseClicked))
         self.submitButton.clicked.connect(partial(self.submitClicked))
         self.refrechButton.clicked.connect(partial(self.refreshClicked))
-        self.returnButton.clicked.connect(partial(self.returnClicked,bbScreen,pile))
+        self.returnButton.clicked.connect(partial(self.returnClicked, bbScreen, pile))
 
     def retranslateUi(self, bbScreen):
         _translate = QtCore.QCoreApplication.translate
@@ -178,14 +180,14 @@ class Ui_bbScreen(object):
         self.checkBox_2.setChecked(False)
         self.result1.setText("-")
         self.result2.setText("-")
-        
-    def returnClicked(self,screen,pile):
+
+    def returnClicked(self, screen, pile):
         print("return ")
         ui = pile.pop()
         print(pile)
-        ui.setupUi(screen,pile)
-        #ui = popScreen()
-        #ui.setupUi(screen)
+        ui.setupUi(screen, pile)
+        # ui = popScreen()
+        # ui.setupUi(screen)
 
 
 if __name__ == "__main__":

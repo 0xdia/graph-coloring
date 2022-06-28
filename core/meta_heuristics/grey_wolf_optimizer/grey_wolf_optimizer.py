@@ -51,8 +51,8 @@ def GWO(g, max_iter, pack_size):
 
         a = 2 * (1 - iter / max_iter)
 
-    end_time =time.time()
+    end_time = time.time()
     g.validate_solution()
     print("wolves alpha ", wolves[alpha][0])
     print("g.optimum ", g.optimum)
-    return g.optimum , end_time-start_time
+    return g.optimum, end_time - start_time
