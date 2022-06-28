@@ -1,4 +1,3 @@
-from cmath import inf
 import time
 from random import randint, shuffle, seed
 from math import floor

@@ -1,20 +1,15 @@
+from PyQt5 import QtWidgets
 import sys
-from graph import graph
-from meta_heuristics.grey_wolf_optimizer.grey_wolf_optimizer import GWO
+from screens.home import Ui_MainWindow
+
+pile = []
 
 if __name__ == "__main__":
-    # Vérifier la validité d'usage.
-    if len(sys.argv) != 2:
-        print("error: wrong number of arguements.")
-        print("usage: python3 main.py input_file.txt\n")
-        exit()
-
-    input_file = sys.argv[1]
-    # Créer un graphe à partir du fichier d'entrée.
-    g = graph()
-    g.read(input_file)
-    # file_name = input_file.split("\\")[-1].split(".")[0]
-    # Colorer le graphe g et mesure le temps que ça prend.
-    # choisir une algorithe et l'appeler ici
-    GWO(g, 500, 50)
-    g.visualize_graph()
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    MainWindow.setFixedHeight(600)
+    MainWindow.setFixedWidth(800)
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow, pile)
+    MainWindow.show()
+    sys.exit(app.exec_())
