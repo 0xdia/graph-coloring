@@ -198,3 +198,5 @@ def measured_branch_and_bound(g, return_on_first_leaf=False, recursive=False):
     print("optimum number of colors: ", g.optimum)
     print("coloring: ", g.colors)
     print("Execution time: ", end_time - start_time)
+
+    return g.optimum, end_time - start_time

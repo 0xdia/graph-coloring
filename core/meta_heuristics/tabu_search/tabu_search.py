@@ -1,6 +1,5 @@
 from collections import deque
 from random import randrange
-from heuristics.d_satur import d_satur
 import time
 
 
@@ -136,3 +135,5 @@ def measure_tabu(
     print("Optimum: ", g.optimum)
     print("Colors: ", g.colors)
     print("Execution time: ", end_time - start_time)
+
+    return g.optimum, end_time - start_time
