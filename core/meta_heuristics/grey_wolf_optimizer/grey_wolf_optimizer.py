@@ -6,16 +6,6 @@ from random import seed, random
 seed(time.time())
 
 
-<<<<<<< HEAD:meta_heuristics/grey_wolf_optimizer/grey_wolf_optimizer.py
-def GWO(g, max_iter, pack_size, a, param_tuning=False):
-    start = time.time()
-    wolves = init_pack(g.num_vertices, pack_size)
-    alpha, beta, delta = 0, 1, 2
-    A = 0
-
-    optimum_convergence = []
-
-=======
 def GWO(g, max_iter, pack_size):
     g.optimum = g.num_vertices
     print("g.vertices ", g.num_vertices)
@@ -23,7 +13,6 @@ def GWO(g, max_iter, pack_size):
     alpha, beta, delta = 0, 1, 2
     a, A = 2, 0
     start_time = time.time()
->>>>>>> origin/main:core/meta_heuristics/grey_wolf_optimizer/grey_wolf_optimizer.py
     for iter in range(max_iter):
         # print(f"[+] Iter {iter}")
         A = 2 * a * random() - a
@@ -63,20 +52,8 @@ def GWO(g, max_iter, pack_size):
 
         a = 2 * (1 - iter / max_iter)
 
-<<<<<<< HEAD:meta_heuristics/grey_wolf_optimizer/grey_wolf_optimizer.py
-        if param_tuning:
-            optimum_convergence.append(g.optimum)
-
-    end = time.time()
-    print("optimum is : ", g.optimum)
-    print("time is : ", end - start)
-    print("solution is : ", g.colors)
-
-    return optimum_convergence
-=======
     end_time = time.time()
     g.validate_solution()
     print("wolves alpha ", wolves[alpha][0])
     print("g.optimum ", g.optimum)
     return g.optimum, end_time - start_time
->>>>>>> origin/main:core/meta_heuristics/grey_wolf_optimizer/grey_wolf_optimizer.py
