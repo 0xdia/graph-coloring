@@ -1,5 +1,5 @@
 import sys
-import os 
+import os
 
 from numpy import False_
 from graph import graph
@@ -18,15 +18,14 @@ if __name__ == "__main__":
         exit()
 
     input_file = sys.argv[1]"""
-    
+
     # Créer un graphe à partir du fichier d'entrée.
     g = graph()
 
-    #Test all input files
+    # Test all input files
     for input_file in os.scandir("./input_files"):
         g.read(input_file.name)
         print(input_file.name)
         max_iter_impact(g, input_file.name)
         pack_size_impact(g, input_file.name)
         a_param_impact(g, input_file.name)
-

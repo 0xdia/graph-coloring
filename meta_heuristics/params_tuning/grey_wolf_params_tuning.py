@@ -58,8 +58,7 @@ def max_iter_impact(g, file_name):
         "./benchmark/grey_wolf/" + file_name[:-4] + "/max_iter_impact.png",
         bbox_inches="tight",
     )
-    #plt.show()
-
+    # plt.show()
 
 
 def pack_size_impact(g, file_name):
@@ -96,7 +95,9 @@ def pack_size_impact(g, file_name):
 
         # re-init the the graph
         g.re_initialize_graph()
-    with open("./benchmark/grey_wolf/" + file_name[:-4] + "/pack_size_impact.txt", "w+",) as fp:
+    with open(
+        "./benchmark/grey_wolf/" + file_name[:-4] + "/pack_size_impact.txt", "w+",
+    ) as fp:
         fp.write("values, optimum, time\n")
         for (max_iter, optimum, t) in zip(pack_size_list, optimums, times):
             fp.write("%s ,%s, %s\n" % (max_iter, optimum, t))
@@ -113,7 +114,7 @@ def pack_size_impact(g, file_name):
         "./benchmark/grey_wolf/" + file_name[:-4] + "/pack_size_impact_values.png",
         bbox_inches="tight",
     )
-    #plt.show()
+    # plt.show()
 
 
 def a_param_impact(g, file_name):
@@ -169,5 +170,4 @@ def a_param_impact(g, file_name):
         "./benchmark/grey_wolf/" + file_name[:-4] + "/a_param_impact.png",
         bbox_inches="tight",
     )
-    #plt.show()
-
+    # plt.show()
