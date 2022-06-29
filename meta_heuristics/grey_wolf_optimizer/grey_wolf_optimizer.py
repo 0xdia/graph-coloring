@@ -60,3 +60,5 @@ def GWO(g, max_iter, pack_size, a, param_tuning=False):
     print("optimum is : ", g.optimum)
     print("time is : ", end - start)
     print("solution is : ", g.colors)
+
+    return optimum_convergence
