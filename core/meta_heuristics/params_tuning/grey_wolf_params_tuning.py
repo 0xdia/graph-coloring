@@ -40,7 +40,8 @@ def max_iter_impact(g, file_name):
         # re-init the the graph
         g.re_initialize_graph()
     with open(
-        "./benchmark/grey_wolf/" + file_name[:-4] + "/max_iter_impact_values.txt", "w+",
+        "./benchmark/grey_wolf/" + file_name[:-4] + "/max_iter_impact_values.txt",
+        "w+",
     ) as fp:
         fp.write("values, optimum, time\n")
         for (max_iter, optimum, t) in zip(max_iter_list, optimums, times):
@@ -96,7 +97,8 @@ def pack_size_impact(g, file_name):
         # re-init the the graph
         g.re_initialize_graph()
     with open(
-        "./benchmark/grey_wolf/" + file_name[:-4] + "/pack_size_impact.txt", "w+",
+        "./benchmark/grey_wolf/" + file_name[:-4] + "/pack_size_impact.txt",
+        "w+",
     ) as fp:
         fp.write("values, optimum, time\n")
         for (max_iter, optimum, t) in zip(pack_size_list, optimums, times):
@@ -152,7 +154,8 @@ def a_param_impact(g, file_name):
         # re-init the the graph
         g.re_initialize_graph()
     with open(
-        "./benchmark/grey_wolf/" + file_name[:-4] + "/a_param_impact_values.txt", "w+",
+        "./benchmark/grey_wolf/" + file_name[:-4] + "/a_param_impact_values.txt",
+        "w+",
     ) as fp:
         fp.write("values, optimum, time\n")
         for (max_iter, optimum, t) in zip(a_param_list, optimums, times):
